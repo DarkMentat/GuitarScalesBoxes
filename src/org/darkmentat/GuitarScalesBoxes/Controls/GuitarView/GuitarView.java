@@ -29,28 +29,23 @@ public class GuitarView extends View
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(mPegTexture1, 0, 0, new Paint());
-        canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), new Paint());
-        canvas.drawBitmap(mPegTexture3, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight(), new Paint());
-        canvas.drawBitmap(mPegTexture4, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight(), new Paint());
-        canvas.drawBitmap(mPegTexture5, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight(), new Paint());
-        canvas.drawBitmap(mPegTexture6, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight()+mPegTexture5.getHeight(), new Paint());
+        final Paint paint = new Paint();
+        final int width = 10;
+        final int height = 6;
 
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth(), mPegTexture1.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight(), new Paint());
+        canvas.drawBitmap(mPegTexture1, 0, 0, paint);
+        canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), paint);
+        canvas.drawBitmap(mPegTexture3, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight(), paint);
+        canvas.drawBitmap(mPegTexture4, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight(), paint);
 
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+mFretTexture.getWidth(), mPegTexture1.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight(), new Paint());
+        for(int i = 0; i < height-3; i++)
+            canvas.drawBitmap(mPegTexture5, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight()+i*mPegTexture5.getHeight(), paint);
 
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+2*mFretTexture.getWidth(), mPegTexture1.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+2*mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+2*mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight(), new Paint());
-        canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth()+2*mFretTexture.getWidth(), mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight(), new Paint());
+        canvas.drawBitmap(mPegTexture6, 0, mPegTexture1.getHeight()+mPegTexture2.getHeight()+mPegTexture3.getHeight()+mPegTexture4.getHeight()+(height-3)*mPegTexture5.getHeight(), paint);
 
+        for(int y = 0; y < height; y++)
+            for(int x = 0; x < width; x++)
+                canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x*mFretTexture.getWidth(), mPegTexture1.getHeight() + y*mFretTexture.getHeight(), paint);
 
         super.onDraw(canvas);
     }
