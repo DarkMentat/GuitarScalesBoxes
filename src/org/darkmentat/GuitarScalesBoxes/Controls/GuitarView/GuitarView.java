@@ -6,10 +6,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import org.darkmentat.GuitarScalesBoxes.R;
 
-public class GuitarView extends View
+import static android.view.GestureDetector.*;
+
+public class GuitarView extends View implements OnGestureListener
 {
     private final Bitmap mFretTexture = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.gv_fret);
     private final Bitmap mPegTexture1 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.gv_peg01);
@@ -19,6 +23,9 @@ public class GuitarView extends View
     private final Bitmap mPegTexture5 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.gv_peg05);
     private final Bitmap mPegTexture6 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.gv_peg06);
 
+    private int mOffset = 0;
+    private GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
+
     public GuitarView(Context context) {
         super(context);
     }
@@ -26,12 +33,53 @@ public class GuitarView extends View
         super(context, attrs);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return true;
+    }
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        mOffset += distanceX;
+        if (mOffset < 0)
+            mOffset = 0;
+
+//            if (mOffset > guitarWidth - getMeasuredWidth())
+//               mOffset = guitarWidth - getMeasuredWidth();
+
+        invalidate();
+        return true;
+    }
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         final Paint paint = new Paint();
         final int width = 10;
         final int height = 6;
+
+        canvas.save();
+        canvas.translate(-mOffset, 0);
+        //todo Don't draw anything outside visible part of view
 
         canvas.drawBitmap(mPegTexture1, 0, 0, paint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), paint);
@@ -46,6 +94,8 @@ public class GuitarView extends View
         for(int y = 0; y < height; y++)
             for(int x = 0; x < width; x++)
                 canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x*mFretTexture.getWidth(), mPegTexture1.getHeight() + y*mFretTexture.getHeight(), paint);
+
+        canvas.restore();
 
         super.onDraw(canvas);
     }
