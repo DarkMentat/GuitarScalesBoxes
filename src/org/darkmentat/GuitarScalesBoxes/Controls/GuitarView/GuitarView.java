@@ -74,6 +74,7 @@ public class GuitarView extends View implements OnGestureListener
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         mScroller.fling(mOffset, 0, (int) -velocityX, 0, 0, mWidth - getMeasuredWidth(), 0, 0);
+        invalidate();
         return true;
     }
 
