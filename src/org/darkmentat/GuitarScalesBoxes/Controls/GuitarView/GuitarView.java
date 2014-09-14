@@ -3,6 +3,7 @@ package org.darkmentat.GuitarScalesBoxes.Controls.GuitarView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,13 +77,17 @@ public class GuitarView extends View implements OnGestureListener
         if (mScroller.computeScrollOffset())
             mOffset = mScroller.getCurrX();
 
+        long a = System.currentTimeMillis();
+
         canvas.save();
         canvas.translate(-mOffset, 0);
-        //todo Don't draw anything outside visible part of view
 
         mDisplayer.draw(canvas);
 
         canvas.restore();
+
+        long b = System.currentTimeMillis() - a;
+        Log.d("Graphics Benchmark", "Draw time: " + b + "ms");
 
         if (!mScroller.isFinished())
             invalidate();
