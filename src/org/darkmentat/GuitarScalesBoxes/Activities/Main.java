@@ -18,7 +18,7 @@ public class Main extends Activity
         setContentView(R.layout.main);
 
         GuitarView g =(GuitarView) findViewById(R.id.main_gvGuitar);
-        FretBoard fretBoard = new FretBoard(4, 3)
+        FretBoard fretBoard = new FretBoard(7, 22)
         {{
             Tab = new Note[FretCount][StringCount];
             for(int x = 0; x < FretCount; x++)

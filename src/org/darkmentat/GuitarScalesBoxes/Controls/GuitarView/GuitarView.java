@@ -1,6 +1,7 @@
 package org.darkmentat.GuitarScalesBoxes.Controls.GuitarView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.OverScroller;
+import org.darkmentat.GuitarScalesBoxes.R;
 
 import static android.view.GestureDetector.OnGestureListener;
 
@@ -19,11 +21,15 @@ public class GuitarView extends View implements OnGestureListener
     private final OverScroller mScroller = new OverScroller(getContext());
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
 
-    public GuitarView(Context context) {
-        super(context);
-    }
     public GuitarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        setVerticalScrollBarEnabled(false);
+        setHorizontalScrollBarEnabled(true);
+
+        TypedArray a = getContext().obtainStyledAttributes(R.styleable.View);
+        initializeScrollbars(a);
+        a.recycle();
     }
 
     public void setFretBoard(FretBoard fretBoard) {
@@ -56,12 +62,7 @@ public class GuitarView extends View implements OnGestureListener
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         mOffset += distanceX;
-        if (mOffset < 0)
-            mOffset = 0;
-
-        if (mOffset > mDisplayer.getWidth() - getMeasuredWidth())
-           mOffset = mDisplayer.getWidth() - getMeasuredWidth();
-
+        awakenScrollBars();
         invalidate();
         return true;
     }
@@ -72,6 +73,14 @@ public class GuitarView extends View implements OnGestureListener
         return true;
     }
 
+    private int getDrawnOffset(){
+        if(mOffset < 0)
+            return 0;
+        if(mOffset > mDisplayer.getWidth() - getMeasuredWidth())
+            return mDisplayer.getWidth() - getMeasuredWidth();
+
+        return mOffset;
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         if (mScroller.computeScrollOffset())
@@ -80,7 +89,7 @@ public class GuitarView extends View implements OnGestureListener
         long a = System.currentTimeMillis();
 
         canvas.save();
-        canvas.translate(-mOffset, 0);
+        canvas.translate(-getDrawnOffset(), 0);
 
         mDisplayer.draw(canvas);
 
