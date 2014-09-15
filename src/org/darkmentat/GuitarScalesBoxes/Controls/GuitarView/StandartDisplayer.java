@@ -20,10 +20,12 @@ class StandartDisplayer implements DisplayerFretBoard
     private final int mFretHeight;
 
     private final Paint mPaint = new Paint();
-    private final Paint mCirclePaintOnScaleNote = new Paint(){{setColor(Color.RED);}};
-    private final Paint mCirclePaintOnBoardNote = new Paint(){{setColor(Color.argb(100,255,0,0));}};
-    private final Paint mCirclePaintOnTonicNote = new Paint(){{setColor(Color.BLUE);}};
-    private final Paint mTextPaint = new Paint(){{setColor(Color.WHITE); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(125,200,0,0));}};
+    private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(125,0,0,200));}};
+    private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(50,255,255,0));}};
+    private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(200,255,255,255)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(200,255,255,100)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(100,0,0,0)); setTextAlign(Align.CENTER); setTextSize(14);}};
 
     private FretBoard mFretBoard;
 
@@ -95,16 +97,16 @@ class StandartDisplayer implements DisplayerFretBoard
 
     }
     private void drawOnBoardNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCirclePaintOnBoardNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextPaint);
+        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCircleOnBoardNote);
+        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnBoardNote);
     }
     private void drawOnScaleNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCirclePaintOnScaleNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextPaint);
+        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f, mCircleOnScaleNote);
+        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnScaleNote);
     }
     private void drawOnTonicNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCirclePaintOnTonicNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextPaint);
+        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCircleOnTonicNote);
+        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnTonicNote);
     }
     private void drawOnScaleOnBoxNote(Canvas canvas, Note note, float x, float y){
         //todo
