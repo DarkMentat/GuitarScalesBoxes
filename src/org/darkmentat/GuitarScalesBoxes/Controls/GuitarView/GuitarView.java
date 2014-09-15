@@ -38,6 +38,19 @@ public class GuitarView extends View implements OnGestureListener
     }
 
     @Override
+    protected int computeHorizontalScrollRange() {
+        return mDisplayer.getWidth();
+    }
+    @Override
+    protected int computeHorizontalScrollOffset() {
+        return mOffset;
+    }
+    @Override
+    protected int computeHorizontalScrollExtent() {
+        return getMeasuredWidth();
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
     }
