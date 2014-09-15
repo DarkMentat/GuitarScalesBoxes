@@ -4,10 +4,9 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <TextView
+    <org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, Main"
-            />
+            android:layout_height="fill_parent"
+            android:id="@+id/main_gvGuitar"/>
 </LinearLayout>
 
