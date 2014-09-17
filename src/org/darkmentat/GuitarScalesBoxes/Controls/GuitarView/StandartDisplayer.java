@@ -42,18 +42,15 @@ class StandartDisplayer implements DisplayerFretBoard
         mFretHeight = mFretTexture.getHeight();
     }
 
-    @Override
-    public void setFretBoard(FretBoard fretBoard) {
+    @Override public void setFretBoard(FretBoard fretBoard) {
         mFretBoard = fretBoard;
     }
 
-    @Override
-    public int getWidth() {
-        return mPegTexture2.getWidth() + mFretBoard.FretCount * mFretWidth;
+    @Override public int getWidth() {
+        return mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mFretWidth;
     }
 
-    @Override
-    public void draw(Canvas canvas) {
+    @Override public void draw(Canvas canvas) {
         if(mFretBoard == null) return;
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
@@ -66,12 +63,12 @@ class StandartDisplayer implements DisplayerFretBoard
 
         canvas.drawBitmap(mPegTexture6, 0, mPegTexture1.getHeight() + mPegTexture2.getHeight() + mPegTexture3.getHeight() + mPegTexture4.getHeight() + (mFretBoard.StringCount - 3) * mPegTexture5.getHeight(), mPaint);
 
-        //todo draw 0-fret on peg
         for (int x = 0; x < mFretBoard.FretCount; x++)
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {
-                canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight, mPaint);
-                drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight);
+                if(x != mFretBoard.FretCount-1)
+                    canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight, mPaint);
+                drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + (x-1) * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight);
             }
     }
 
