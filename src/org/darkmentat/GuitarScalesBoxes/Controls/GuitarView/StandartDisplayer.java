@@ -8,6 +8,8 @@ import static org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.FretBoard.Not
 
 class StandartDisplayer implements DisplayerFretBoard
 {
+    private float mScaleCoef = 1.0f;
+
     private final Bitmap mFretTexture;
     private final Bitmap mPegTexture1;
     private final Bitmap mPegTexture2;
@@ -46,12 +48,24 @@ class StandartDisplayer implements DisplayerFretBoard
         mFretBoard = fretBoard;
     }
 
+    @Override
+    public void setScreenSize(int width, int height) {
+        mScaleCoef = 1.0f;
+        mScaleCoef = height / (float) getHeight();
+    }
+
     @Override public int getWidth() {
-        return mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mFretWidth;
+        return (int) (mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mFretWidth));
+    }
+    public int getHeight() {
+        return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mFretHeight + 4));
     }
 
     @Override public void draw(Canvas canvas) {
         if(mFretBoard == null) return;
+
+        canvas.save();
+        canvas.scale(mScaleCoef,mScaleCoef);
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), mPaint);
@@ -70,6 +84,8 @@ class StandartDisplayer implements DisplayerFretBoard
                     canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight, mPaint);
                 drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + (x-1) * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight);
             }
+
+        canvas.restore();
     }
 
     private void drawNote(Canvas canvas, Note note, float x, float y){

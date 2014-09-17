@@ -34,7 +34,14 @@ public class GuitarView extends View implements OnGestureListener
 
     public void setFretBoard(FretBoard fretBoard) {
         mDisplayer.setFretBoard(fretBoard);
+        mDisplayer.setScreenSize(getMeasuredWidth(), getMeasuredHeight());
         invalidate();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mDisplayer.setScreenSize(getMeasuredWidth(), getMeasuredHeight());
     }
 
     @Override
