@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="View">
+    <declare-styleable name="GuitarView">
         <attr name="android:fadeScrollbars" />
         <attr name="android:scrollbarAlwaysDrawHorizontalTrack" />
         <attr name="android:scrollbarAlwaysDrawVerticalTrack" />
@@ -13,5 +13,7 @@
         <attr name="android:scrollbarTrackHorizontal" />
         <attr name="android:scrollbarTrackVertical" />
         <attr name="android:scrollbars" />
+
+        <attr name="minFretsOnScreen" format="integer"/>
     </declare-styleable>
 </resources>

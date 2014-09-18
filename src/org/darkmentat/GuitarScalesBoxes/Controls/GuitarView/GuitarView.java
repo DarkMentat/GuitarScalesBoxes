@@ -28,7 +28,8 @@ public class GuitarView extends View implements OnGestureListener
         setVerticalScrollBarEnabled(false);
         setHorizontalScrollBarEnabled(true);
 
-        TypedArray a = getContext().obtainStyledAttributes(R.styleable.View);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.GuitarView);
+        setMinFretCountOnScreen(a.getInt(R.styleable.GuitarView_minFretsOnScreen, 0));
         initializeScrollbars(a);
         a.recycle();
     }
