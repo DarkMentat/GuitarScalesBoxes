@@ -17,5 +17,6 @@ public class Main extends Activity
         GuitarView g =(GuitarView) findViewById(R.id.main_gvGuitar);
         FretBoard fretBoard = new GuitarModel(GuitarSetting.Default, 24);
         g.setFretBoard(fretBoard);
+        g.setMinFretCountOnScreen(6);
     }
 }

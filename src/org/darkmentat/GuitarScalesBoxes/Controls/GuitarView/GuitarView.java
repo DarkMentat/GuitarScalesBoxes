@@ -17,6 +17,7 @@ public class GuitarView extends View implements OnGestureListener
 {
     private DisplayerFretBoard mDisplayer = new StandartDisplayer(getContext());
 
+    private int mMinFretCountOnScreen;
     private int mOffset = 0;
     private final OverScroller mScroller = new OverScroller(getContext());
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
@@ -34,60 +35,54 @@ public class GuitarView extends View implements OnGestureListener
 
     public void setFretBoard(FretBoard fretBoard) {
         mDisplayer.setFretBoard(fretBoard);
-        mDisplayer.setScreenSize(getMeasuredWidth(), getMeasuredHeight());
         invalidate();
     }
+    public void setMinFretCountOnScreen(int frets){
+        mMinFretCountOnScreen = frets;
+        if (getMeasuredWidth() > 0)
+            mDisplayer.setMinFretCountOnScreen(mMinFretCountOnScreen);
+    }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mDisplayer.setScreenSize(getMeasuredWidth(), getMeasuredHeight());
+        mDisplayer.setMinFretCountOnScreen(mMinFretCountOnScreen);
     }
 
-    @Override
-    protected int computeHorizontalScrollRange() {
+    @Override protected int computeHorizontalScrollRange() {
         return mDisplayer.getWidth();
     }
-    @Override
-    protected int computeHorizontalScrollOffset() {
+    @Override protected int computeHorizontalScrollOffset() {
         return mOffset;
     }
-    @Override
-    protected int computeHorizontalScrollExtent() {
+    @Override protected int computeHorizontalScrollExtent() {
         return getMeasuredWidth();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    @Override public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
     }
 
-    @Override
-    public void onShowPress(MotionEvent e) {
+    @Override public void onShowPress(MotionEvent e) {
 
     }
-    @Override
-    public boolean onDown(MotionEvent e) {
+    @Override public boolean onDown(MotionEvent e) {
         mScroller.forceFinished(true);
         return true;
     }
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
+    @Override public boolean onSingleTapUp(MotionEvent e) {
         return false;
     }
-    @Override
-    public void onLongPress(MotionEvent e) {
+    @Override public void onLongPress(MotionEvent e) {
 
     }
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+    @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         mOffset += distanceX;
         awakenScrollBars();
         invalidate();
         return true;
     }
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+    @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         mScroller.fling(mOffset, 0, (int) -velocityX, 0, 0, mDisplayer.getWidth() - getMeasuredWidth(), 0, 0);
         invalidate();
         return true;
@@ -101,8 +96,7 @@ public class GuitarView extends View implements OnGestureListener
 
         return mOffset;
     }
-    @Override
-    protected void onDraw(Canvas canvas) {
+    @Override protected void onDraw(Canvas canvas) {
         if (mScroller.computeScrollOffset())
             mOffset = mScroller.getCurrX();
 
