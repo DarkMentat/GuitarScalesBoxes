@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GuitarScalesBoxes</string>
+
+    <string-array name="scale_Names">
+        <item>"Chromatic scale"</item>
+        <item>"Natural minor"</item>
+        <item>"Pentatonic"</item>
+    </string-array>
+    <string-array name="scale_Descriptions">
+        <item>"The chromatic scale is a musical scale with twelve pitches, each a semitone above or below another. "</item>
+        <item>"The natural minor scale has the same tones as the major scale, but uses the sixth tone of the major scale as its tonic."</item>
+        <item>"A pentatonic scale is a musical scale or mode with five notes per octave"</item>
+    </string-array>
+    <string-array name="scale_stepSequences">
+        <item>"11111111111"</item>
+        <item>"212212"</item>
+        <item>"3232"</item>
+    </string-array>
 </resources>
