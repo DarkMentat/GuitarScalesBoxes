@@ -30,6 +30,9 @@ class StandartDisplayer implements DisplayerFretBoard
     private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(200,255,255,100)); setTextAlign(Align.CENTER); setTextSize(14);}};
     private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(100,0,0,0)); setTextAlign(Align.CENTER); setTextSize(14);}};
 
+    private Bitmap mCachedScreen;
+    private boolean mCachedScreenNeedsUpdate = true;
+
     private FretBoard mFretBoard;
     private int mScreenWidth;
     private int mScreenHeight;
@@ -81,9 +84,13 @@ class StandartDisplayer implements DisplayerFretBoard
         return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mActualFretHeight + 4));
     }
 
-    @Override public void draw(Canvas canvas) {
-        if(mFretBoard == null) return;
-
+    private void updateCachedScreen() {
+        mCachedScreen = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(mCachedScreen);
+        drawStatic(c);
+        mCachedScreenNeedsUpdate = false;
+    }
+    private void drawStatic(Canvas canvas){
         canvas.save();
         canvas.scale(mScaleCoef,mScaleCoef);
 
@@ -106,6 +113,13 @@ class StandartDisplayer implements DisplayerFretBoard
             }
 
         canvas.restore();
+    }
+    @Override public void draw(Canvas canvas) {
+        if(mFretBoard == null) return;
+
+        if(mCachedScreenNeedsUpdate)
+            updateCachedScreen();
+        canvas.drawBitmap(mCachedScreen, 0, 0, mPaint);
     }
 
     private void drawNote(Canvas canvas, Note note, float x, float y){

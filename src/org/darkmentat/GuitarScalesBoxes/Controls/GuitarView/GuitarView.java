@@ -42,6 +42,7 @@ public class GuitarView extends View implements OnGestureListener
         mMinFretCountOnScreen = frets;
         if (getMeasuredWidth() > 0)
             mDisplayer.setMinFretCountOnScreen(mMinFretCountOnScreen);
+        invalidate();
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
