@@ -22,7 +22,7 @@ class StandartDisplayer implements DisplayerFretBoard
     private int mActualFretWidth;
     private int mActualFretHeight;
 
-    private final Paint mPaint = new Paint();
+    private final Paint mPaint = new Paint(){{setFlags(FILTER_BITMAP_FLAG); }};
     private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(125,200,0,0));}};
     private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(125,0,0,200));}};
     private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(50,255,255,0));}};
