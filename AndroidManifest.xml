@@ -15,5 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.ScalesOverview"
+                  android:screenOrientation="sensorLandscape"/>
+        <activity android:name=".Activities.ScaleDescription"
+                  android:screenOrientation="sensorLandscape"/>
     </application>
 </manifest>

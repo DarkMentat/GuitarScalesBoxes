@@ -1,6 +1,7 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView;
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarModel;
@@ -19,5 +20,7 @@ public class Main extends Activity
         GuitarModel fretBoard = new GuitarModel(GuitarSetting.Default, 24);
         fretBoard.setScale(new Scale(NoteModel.NoteValue.A, "212212"));
         g.setFretBoard(fretBoard);
+
+        startActivity(new Intent(this, ScalesOverview.class));
     }
 }
