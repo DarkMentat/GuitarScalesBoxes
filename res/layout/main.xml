@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res/org.darkmentat.GuitarScalesBoxes"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
+              android:layout_height="fill_parent">
     <org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/main_gvGuitar"/>
+            android:id="@+id/main_gvGuitar"
+            app:minFretsOnScreen="5"/>
 </LinearLayout>
 

@@ -8,6 +8,8 @@ import static org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.FretBoard.Not
 
 class StandartDisplayer implements DisplayerFretBoard
 {
+    private float mScaleCoef = 1.0f;
+
     private final Bitmap mFretTexture;
     private final Bitmap mPegTexture1;
     private final Bitmap mPegTexture2;
@@ -15,19 +17,25 @@ class StandartDisplayer implements DisplayerFretBoard
     private final Bitmap mPegTexture4;
     private final Bitmap mPegTexture5;
     private final Bitmap mPegTexture6;
+    private Bitmap mActualFretTexture;
 
-    private final int mFretWidth;
-    private final int mFretHeight;
+    private int mActualFretWidth;
+    private int mActualFretHeight;
 
-    private final Paint mPaint = new Paint();
-    private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(125,200,0,0));}};
-    private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(125,0,0,200));}};
-    private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(50,255,255,0));}};
-    private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(200,255,255,255)); setTextAlign(Align.CENTER); setTextSize(14);}};
-    private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(200,255,255,100)); setTextAlign(Align.CENTER); setTextSize(14);}};
-    private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(100,0,0,0)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mPaint = new Paint(){{setFlags(FILTER_BITMAP_FLAG); }};
+    private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(255,87,167,92));}};
+    private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(255,12,128,0));}};
+    private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(255,255,240,168));}};
+    private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(255,166,145,47)); setTextAlign(Align.CENTER); setTextSize(14);}};
+
+    private Bitmap mCachedScreen;
+    private boolean mCachedScreenNeedsUpdate = true;
 
     private FretBoard mFretBoard;
+    private int mScreenWidth;
+    private int mScreenHeight;
 
     public StandartDisplayer(Context context) {
         mFretTexture = BitmapFactory.decodeResource(context.getResources(), R.drawable.gv_fret);
@@ -38,23 +46,53 @@ class StandartDisplayer implements DisplayerFretBoard
         mPegTexture5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.gv_peg05);
         mPegTexture6 = BitmapFactory.decodeResource(context.getResources(), R.drawable.gv_peg06);
 
-        mFretWidth = mFretTexture.getWidth();
-        mFretHeight = mFretTexture.getHeight();
+        mActualFretTexture = mFretTexture;
+        mActualFretWidth = mActualFretTexture.getWidth();
+        mActualFretHeight = mActualFretTexture.getHeight();
     }
 
-    @Override
-    public void setFretBoard(FretBoard fretBoard) {
+    @Override public void setFretBoard(FretBoard fretBoard) {
         mFretBoard = fretBoard;
     }
 
-    @Override
-    public int getWidth() {
-        return mPegTexture2.getWidth() + mFretBoard.FretCount * mFretWidth;
+    @Override public void setScreenSize(int width, int height) {
+        mScreenWidth = width;
+        mScreenHeight = height;
+        mScaleCoef = 1.0f;
+        mScaleCoef = height / (float) getHeight();
+    }
+    @Override public void setMinFretCountOnScreen(int frets){
+        int width = (int) (mScreenWidth/(mScaleCoef*frets));
+        int crop = mFretTexture.getWidth()-width;
+
+        if(width > mFretTexture.getWidth())
+        {
+            width = mFretTexture.getWidth();
+            crop = 0;
+        }
+
+        mActualFretTexture = Bitmap.createBitmap(mFretTexture,crop,0, width,mFretTexture.getHeight());
+
+        mActualFretWidth = mActualFretTexture.getWidth();
+        mActualFretHeight = mActualFretTexture.getHeight();
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        if(mFretBoard == null) return;
+    @Override public int getWidth() {
+        return (int) (mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mActualFretWidth));
+    }
+    @Override public int getHeight() {
+        return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mActualFretHeight + 4));
+    }
+
+    private void updateCachedScreen() {
+        mCachedScreen = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(mCachedScreen);
+        drawStatic(c);
+        mCachedScreenNeedsUpdate = false;
+    }
+    private void drawStatic(Canvas canvas){
+        canvas.save();
+        canvas.scale(mScaleCoef,mScaleCoef);
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), mPaint);
@@ -66,13 +104,22 @@ class StandartDisplayer implements DisplayerFretBoard
 
         canvas.drawBitmap(mPegTexture6, 0, mPegTexture1.getHeight() + mPegTexture2.getHeight() + mPegTexture3.getHeight() + mPegTexture4.getHeight() + (mFretBoard.StringCount - 3) * mPegTexture5.getHeight(), mPaint);
 
-        //todo draw 0-fret on peg
         for (int x = 0; x < mFretBoard.FretCount; x++)
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {
-                canvas.drawBitmap(mFretTexture, mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight, mPaint);
-                drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + x * mFretWidth, mPegTexture1.getHeight() + y * mFretHeight);
+                if(x != mFretBoard.FretCount-1)
+                    canvas.drawBitmap(mActualFretTexture, mPegTexture2.getWidth() + x * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight, mPaint);
+                drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + (x-1) * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight);
             }
+
+        canvas.restore();
+    }
+    @Override public void draw(Canvas canvas) {
+        if(mFretBoard == null) return;
+
+        if(mCachedScreenNeedsUpdate)
+            updateCachedScreen();
+        canvas.drawBitmap(mCachedScreen, 0, 0, mPaint);
     }
 
     private void drawNote(Canvas canvas, Note note, float x, float y){
@@ -97,16 +144,16 @@ class StandartDisplayer implements DisplayerFretBoard
 
     }
     private void drawOnBoardNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCircleOnBoardNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnBoardNote);
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2.75f,mCircleOnBoardNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnBoardNote);
     }
     private void drawOnScaleNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f, mCircleOnScaleNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnScaleNote);
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2.75f, mCircleOnScaleNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnScaleNote);
     }
     private void drawOnTonicNote(Canvas canvas, Note note, float x, float y){
-        canvas.drawCircle(x+mFretWidth/2,y+mFretHeight/2,mFretHeight/2.75f,mCircleOnTonicNote);
-        canvas.drawText(note.DisplayName, x+mFretWidth/2, y+mFretHeight/2+mFretHeight/5.5f, mTextOnTonicNote);
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2.75f,mCircleOnTonicNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnTonicNote);
     }
     private void drawOnScaleOnBoxNote(Canvas canvas, Note note, float x, float y){
         //todo
