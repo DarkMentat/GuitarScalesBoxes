@@ -23,12 +23,12 @@ class StandartDisplayer implements DisplayerFretBoard
     private int mActualFretHeight;
 
     private final Paint mPaint = new Paint(){{setFlags(FILTER_BITMAP_FLAG); }};
-    private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(125,200,0,0));}};
-    private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(125,0,0,200));}};
-    private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(50,255,255,0));}};
-    private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(200,255,255,255)); setTextAlign(Align.CENTER); setTextSize(14);}};
-    private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(200,255,255,100)); setTextAlign(Align.CENTER); setTextSize(14);}};
-    private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(100,0,0,0)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(255,87,167,92));}};
+    private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(255,12,128,0));}};
+    private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(255,255,240,168));}};
+    private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(255,166,145,47)); setTextAlign(Align.CENTER); setTextSize(14);}};
 
     private Bitmap mCachedScreen;
     private boolean mCachedScreenNeedsUpdate = true;
