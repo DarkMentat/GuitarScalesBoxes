@@ -30,5 +30,7 @@ public class GuitarModel extends FretBoard
                 if(scale.isNoteScaleTonic(((NoteModel) Tab[x][y])))
                     Tab[x][y].Quality = NoteQuality.OnTonic;
             }
+        setChanged();
+        notifyObservers();
     }
 }

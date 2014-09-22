@@ -11,9 +11,12 @@ import android.view.View;
 import android.widget.OverScroller;
 import org.darkmentat.GuitarScalesBoxes.R;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import static android.view.GestureDetector.OnGestureListener;
 
-public class GuitarView extends View implements OnGestureListener
+public class GuitarView extends View implements OnGestureListener, Observer
 {
     private DisplayerFretBoard mDisplayer = new StandartDisplayer(getContext());
 
@@ -34,7 +37,12 @@ public class GuitarView extends View implements OnGestureListener
         a.recycle();
     }
 
+    @Override public void update(Observable observable, Object data) {
+        mDisplayer.update();
+        invalidate();
+    }
     public void setFretBoard(FretBoard fretBoard) {
+        fretBoard.addObserver(this);
         mDisplayer.setFretBoard(fretBoard);
         invalidate();
     }

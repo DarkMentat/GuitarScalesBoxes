@@ -1,6 +1,8 @@
 package org.darkmentat.GuitarScalesBoxes.Controls.GuitarView;
 
-public abstract class FretBoard
+import java.util.Observable;
+
+public abstract class FretBoard extends Observable
 {
     public static enum NoteQuality
     {

@@ -8,6 +8,7 @@ interface DisplayerFretBoard
     public void setFretBoard(FretBoard fretBoard);
     public void setScreenSize(int width, int height);
     public void setMinFretCountOnScreen(int frets);
+    public void update();
     public int getWidth();
     public int getHeight();
 }

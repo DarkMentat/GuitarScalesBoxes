@@ -51,6 +51,9 @@ class StandartDisplayer implements DisplayerFretBoard
         mActualFretHeight = mActualFretTexture.getHeight();
     }
 
+    @Override public void update() {
+        mCachedScreenNeedsUpdate = true;
+    }
     @Override public void setFretBoard(FretBoard fretBoard) {
         mFretBoard = fretBoard;
     }
