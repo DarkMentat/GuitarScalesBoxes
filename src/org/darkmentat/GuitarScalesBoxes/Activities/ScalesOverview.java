@@ -31,6 +31,14 @@ public class ScalesOverview extends Activity
                     view = mInflater.inflate(R.layout.listviewitem, parent, false);
 
                 ((TextView) view.findViewById(R.id.listviewitem_tvText)).setText(this.getItem(position));
+                view.findViewById(R.id.listviewitem_tvText).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(ScalesOverview.this, SelectNote.class);
+                        i.putExtra("ScaleIndex", position);
+                        startActivity(i);
+                    }
+                });
                 view.findViewById(R.id.listviewitem_btnInfo).setOnClickListener(new View.OnClickListener()
                 {
                     @Override
