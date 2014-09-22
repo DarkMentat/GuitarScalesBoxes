@@ -22,5 +22,7 @@
                   android:screenOrientation="sensorLandscape"/>
         <activity android:name=".Activities.SelectNote"
                   android:screenOrientation="sensorLandscape"/>
+        <activity android:name=".Activities.SelectSetting"
+                  android:screenOrientation="sensorLandscape"/>
     </application>
 </manifest>

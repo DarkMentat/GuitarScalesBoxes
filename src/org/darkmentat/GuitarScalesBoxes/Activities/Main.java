@@ -23,13 +23,21 @@ public class Main extends Activity
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("Select scale");
+        menu.add(0,0,0, "Select scale");
+        menu.add(0,1,1, "Select setting");
 
         return super.onCreateOptionsMenu(menu);
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        startActivity(new Intent(this, ScalesOverview.class));
-
+        switch (item.getItemId())
+        {
+            case 0:
+                startActivity(new Intent(this, ScalesOverview.class));
+                break;
+            case 1:
+                startActivity(new Intent(this, SelectSetting.class));
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

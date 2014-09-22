@@ -12,7 +12,7 @@ public final class GuitarSetting
                 new NoteModel(NoteValue.D, 3),
                 new NoteModel(NoteValue.A, 2),
                 new NoteModel(NoteValue.E, 2),
-        });
+        }, "Default");
         HalfStepDown = new GuitarSetting(new NoteModel[]{
                 new NoteModel(NoteValue.Dd, 4),
                 new NoteModel(NoteValue.Ad, 3),
@@ -20,7 +20,7 @@ public final class GuitarSetting
                 new NoteModel(NoteValue.Cd, 3),
                 new NoteModel(NoteValue.Gd, 2),
                 new NoteModel(NoteValue.Dd, 2),
-        });
+        }, "Half Step Down");
         OneStepDown = new GuitarSetting(new NoteModel[]{
                 new NoteModel(NoteValue.D, 4),
                 new NoteModel(NoteValue.A, 3),
@@ -28,7 +28,7 @@ public final class GuitarSetting
                 new NoteModel(NoteValue.C, 3),
                 new NoteModel(NoteValue.G, 2),
                 new NoteModel(NoteValue.D, 2),
-        });
+        }, "One Step Down");
         DropD = new GuitarSetting(new NoteModel[]{
                 new NoteModel(NoteValue.E, 4),
                 new NoteModel(NoteValue.H, 3),
@@ -36,7 +36,7 @@ public final class GuitarSetting
                 new NoteModel(NoteValue.D, 3),
                 new NoteModel(NoteValue.A, 2),
                 new NoteModel(NoteValue.D, 2),
-        });
+        }, "Drop D");
         DropC = new GuitarSetting(new NoteModel[]{
                 new NoteModel(NoteValue.D, 4),
                 new NoteModel(NoteValue.A, 3),
@@ -44,7 +44,7 @@ public final class GuitarSetting
                 new NoteModel(NoteValue.C, 3),
                 new NoteModel(NoteValue.G, 2),
                 new NoteModel(NoteValue.C, 2),
-        });
+        }, "Drop C");
     }
 
     public static final GuitarSetting Default;
@@ -53,10 +53,19 @@ public final class GuitarSetting
     public static final GuitarSetting DropD;
     public static final GuitarSetting DropC;
 
+    public static GuitarSetting[] Settings = new GuitarSetting[]{Default, HalfStepDown, OneStepDown, DropD, DropC};
+
     public final int StringCount;
     public final NoteModel[] StartNotes;
-    private GuitarSetting(NoteModel[] notes) {
+    private final String mName;
+
+    private GuitarSetting(NoteModel[] notes, String name) {
+        mName = name;
         StringCount = notes.length;
         StartNotes = notes;
+    }
+
+    @Override public String toString() {
+        return mName;
     }
 }

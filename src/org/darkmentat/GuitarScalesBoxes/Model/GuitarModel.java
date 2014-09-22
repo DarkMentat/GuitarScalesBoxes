@@ -9,13 +9,7 @@ public class GuitarModel extends FretBoard
     public GuitarModel(GuitarSetting setting, int fretCount) {
         super(setting.StringCount, fretCount);
 
-        Tab = new NoteModel[fretCount][setting.StringCount];
-
-        System.arraycopy(setting.StartNotes, 0, Tab[0], 0, setting.StartNotes.length);
-
-        for (int x = 1; x < fretCount; x++)
-            for(int y = 0; y < setting.StartNotes.length; y++)
-                Tab[x][y] = ((NoteModel)Tab[x-1][y]).getNext();
+        setSetting(setting);
     }
 
     public void setScale(Scale scale){
@@ -32,6 +26,21 @@ public class GuitarModel extends FretBoard
                 if(scale.isNoteScaleTonic(((NoteModel) Tab[x][y])))
                     Tab[x][y].Quality = NoteQuality.OnTonic;
             }
+        setChanged();
+        notifyObservers();
+    }
+    public void setSetting(GuitarSetting setting){
+        Tab = new NoteModel[FretCount][setting.StringCount];
+
+        System.arraycopy(setting.StartNotes, 0, Tab[0], 0, setting.StartNotes.length);
+
+        for (int x = 1; x < FretCount; x++)
+            for(int y = 0; y < setting.StartNotes.length; y++)
+                Tab[x][y] = ((NoteModel)Tab[x-1][y]).getNext();
+
+        if(mScale != null)
+            setScale(mScale);
+
         setChanged();
         notifyObservers();
     }
