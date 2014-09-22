@@ -24,6 +24,8 @@ public class GuitarModel extends FretBoard
         for (int x = 0; x < FretCount; x++)
             for(int y = 0; y < StringCount; y++)
             {
+                Tab[x][y].Quality = NoteQuality.OnBoard;
+
                 if(scale.isNoteOnScale(((NoteModel) Tab[x][y])))
                     Tab[x][y].Quality = NoteQuality.OnScale;
 
