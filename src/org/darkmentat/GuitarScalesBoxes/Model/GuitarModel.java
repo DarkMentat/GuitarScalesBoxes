@@ -1,5 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Model;
 
+import android.graphics.Point;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.FretBoard;
 
 public class GuitarModel extends FretBoard
@@ -40,6 +41,19 @@ public class GuitarModel extends FretBoard
 
         if(mScale != null)
             setScale(mScale);
+
+        setChanged();
+        notifyObservers();
+    }
+    public void setBox(Box box){
+        for (Point p : box.Points)
+        {
+            if(Tab[p.x][p.y].Quality == NoteQuality.OnTonic)
+               Tab[p.x][p.y].Quality =  NoteQuality.OnTonicOnBox;
+            else
+            if(Tab[p.x][p.y].Quality == NoteQuality.OnScale)
+               Tab[p.x][p.y].Quality =  NoteQuality.OnScaleOnBox;
+        }
 
         setChanged();
         notifyObservers();

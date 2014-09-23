@@ -8,14 +8,14 @@ import static org.darkmentat.GuitarScalesBoxes.Model.NoteModel.NoteValue;
 public class Scale
 {
     private final NoteModel mTonic;
-    private final List<NoteValue> mNotesInScale;
+    public final List<NoteValue> NotesInScale;
 
     public Scale(NoteValue tonic, String stepSequence) {
         this(new NoteModel(tonic, 0), stepSequence);
     }
     public Scale(NoteModel tonic, String stepSequence) {
         mTonic = tonic;
-        mNotesInScale = Arrays.asList(parseStepSequence(stepSequence));
+        NotesInScale = Arrays.asList(parseStepSequence(stepSequence));
     }
 
     private NoteValue[] parseStepSequence(String stepSequence){
@@ -36,7 +36,7 @@ public class Scale
     }
 
     public boolean isNoteOnScale(NoteModel note){
-        return mNotesInScale.contains(note.Value);
+        return NotesInScale.contains(note.Value);
     }
     public boolean isNoteScaleTonic(NoteModel note){
         return mTonic.Value == note.Value;
