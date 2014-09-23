@@ -95,6 +95,9 @@ class StandartDisplayer implements DisplayerFretBoard
     }
     private void drawStatic(Canvas canvas){
         canvas.save();
+        if(mScaleCoef > 2f)
+            mScaleCoef = 2f;
+
         canvas.scale(mScaleCoef,mScaleCoef);
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
@@ -108,21 +111,28 @@ class StandartDisplayer implements DisplayerFretBoard
         canvas.drawBitmap(mPegTexture6, 0, mPegTexture1.getHeight() + mPegTexture2.getHeight() + mPegTexture3.getHeight() + mPegTexture4.getHeight() + (mFretBoard.StringCount - 3) * mPegTexture5.getHeight(), mPaint);
 
         for (int x = 0; x < mFretBoard.FretCount; x++)
+        {
+            canvas.drawText(x+"",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, 4*mPegTexture1.getHeight()/5, mTextOnBoardNote);
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {
                 if(x != mFretBoard.FretCount-1)
                     canvas.drawBitmap(mActualFretTexture, mPegTexture2.getWidth() + x * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight, mPaint);
                 drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + (x-1) * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight);
             }
-
+        }
         canvas.restore();
     }
     @Override public void draw(Canvas canvas) {
         if(mFretBoard == null) return;
 
-        if(mCachedScreenNeedsUpdate)
-            updateCachedScreen();
-        canvas.drawBitmap(mCachedScreen, 0, 0, mPaint);
+        if(mCachedScreen != null && mCachedScreen.getWidth() > 2048) //fuck
+            drawStatic(canvas);
+        else
+        {
+            if (mCachedScreenNeedsUpdate)
+                updateCachedScreen();
+            canvas.drawBitmap(mCachedScreen, 0, 0, mPaint);
+        }
     }
 
     private void drawNote(Canvas canvas, Note note, float x, float y){
