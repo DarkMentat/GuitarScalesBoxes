@@ -29,6 +29,7 @@ class StandartDisplayer implements DisplayerFretBoard
     private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
     private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14);}};
     private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(255,166,145,47)); setTextAlign(Align.CENTER); setTextSize(14);}};
+    private final Paint mTextFretNum = new Paint(){{setColor(Color.argb(255,255,236,145)); setTextAlign(Align.CENTER); setTextSize(20);}};
 
     private Bitmap mCachedScreen;
     private boolean mCachedScreenNeedsUpdate = true;
@@ -112,7 +113,27 @@ class StandartDisplayer implements DisplayerFretBoard
 
         for (int x = 0; x < mFretBoard.FretCount; x++)
         {
-            canvas.drawText(x+"",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, 4*mPegTexture1.getHeight()/5, mTextOnBoardNote);
+            if(x == 1)
+                canvas.drawText("I",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 3)
+                canvas.drawText("III",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 5)
+                canvas.drawText("V",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 7)
+                canvas.drawText("VII",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 9)
+                canvas.drawText("IX",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 12)
+                canvas.drawText("XII",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 15)
+                canvas.drawText("XV",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 17)
+                canvas.drawText("XVII",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 19)
+                canvas.drawText("XIX",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+            if(x == 22)
+                canvas.drawText("XXII",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {
                 if(x != mFretBoard.FretCount-1)
@@ -125,7 +146,7 @@ class StandartDisplayer implements DisplayerFretBoard
     @Override public void draw(Canvas canvas) {
         if(mFretBoard == null) return;
 
-        if(mCachedScreen != null && mCachedScreen.getWidth() > 2048) //fuck
+        if(mCachedScreen != null && mCachedScreen.getWidth() > 4096) //fuck
             drawStatic(canvas);
         else
         {
