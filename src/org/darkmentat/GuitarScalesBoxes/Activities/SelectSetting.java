@@ -3,6 +3,8 @@ package org.darkmentat.GuitarScalesBoxes.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,8 +14,7 @@ import org.darkmentat.GuitarScalesBoxes.R;
 
 public class SelectSetting extends Activity
 {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selectsetting);
 
@@ -30,5 +31,20 @@ public class SelectSetting extends Activity
                 startActivity(i);
             }
         });
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,0,0, "Custom setting");
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case 0:
+                startActivity(new Intent(this, CreateCustomSetting.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

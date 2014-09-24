@@ -21,7 +21,7 @@ public class ScalesOverview extends Activity
         setContentView(R.layout.scalesoverview);
 
         ListView scales = (ListView) findViewById(R.id.scalesoverview_lvScales);
-        scales.setAdapter(new ArrayAdapter<String>(this, R.layout.listviewitem, getResources().getStringArray(R.array.scale_Names))
+        scales.setAdapter(new ArrayAdapter<String>(this, R.layout.scalesoverview_item, getResources().getStringArray(R.array.scale_Names))
         {
             private LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -29,7 +29,7 @@ public class ScalesOverview extends Activity
             public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = convertView;
                 if (view == null)
-                    view = mInflater.inflate(R.layout.listviewitem, parent, false);
+                    view = mInflater.inflate(R.layout.scalesoverview_item, parent, false);
 
                 ((TextView) view.findViewById(R.id.listviewitem_tvText)).setText(this.getItem(position));
                 view.findViewById(R.id.listviewitem_btnInfo).setOnClickListener(new View.OnClickListener()

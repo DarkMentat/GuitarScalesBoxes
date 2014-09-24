@@ -59,7 +59,10 @@ public final class GuitarSetting
     public final NoteModel[] StartNotes;
     private final String mName;
 
-    private GuitarSetting(NoteModel[] notes, String name) {
+    public GuitarSetting(NoteModel[] notes) {
+        this(notes, "");
+    }
+    public GuitarSetting(NoteModel[] notes, String name) {
         mName = name;
         StringCount = notes.length;
         StartNotes = notes;

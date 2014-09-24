@@ -31,7 +31,8 @@ public class GuitarModel extends FretBoard
         notifyObservers();
     }
     public void setSetting(GuitarSetting setting){
-        Tab = new NoteModel[FretCount][setting.StringCount];
+        StringCount = setting.StringCount;
+        Tab = new NoteModel[FretCount][StringCount];
 
         System.arraycopy(setting.StartNotes, 0, Tab[0], 0, setting.StartNotes.length);
 

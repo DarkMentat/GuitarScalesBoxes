@@ -59,11 +59,14 @@ class StandartDisplayer implements DisplayerFretBoard
         mFretBoard = fretBoard;
     }
 
+    private void updateScaleCoef() {
+        mScaleCoef = 1.0f;
+        mScaleCoef = mScreenHeight / (float) getHeight();
+    }
     @Override public void setScreenSize(int width, int height) {
         mScreenWidth = width;
         mScreenHeight = height;
-        mScaleCoef = 1.0f;
-        mScaleCoef = height / (float) getHeight();
+        updateScaleCoef();
     }
     @Override public void setMinFretCountOnScreen(int frets){
         int width = (int) (mScreenWidth/(mScaleCoef*frets));
@@ -89,6 +92,7 @@ class StandartDisplayer implements DisplayerFretBoard
     }
 
     private void updateCachedScreen() {
+        updateScaleCoef();
         mCachedScreen = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(mCachedScreen);
         drawStatic(c);
@@ -96,8 +100,8 @@ class StandartDisplayer implements DisplayerFretBoard
     }
     private void drawStatic(Canvas canvas){
         canvas.save();
-        if(mScaleCoef > 2f)
-            mScaleCoef = 2f;
+        if(mScaleCoef > 1.75f)
+            mScaleCoef = 1.75f;
 
         canvas.scale(mScaleCoef,mScaleCoef);
 

@@ -14,7 +14,7 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
     private NoteValue[] mNoteValues = NoteValue.values();
 
     public final NoteValue Value;
-    public final int Octave;
+    public final int Octave;       // todo Octave to enum
 
     public NoteModel(NoteValue value, int octave) {
         this(FretBoard.NoteQuality.OnBoard, value, octave);
