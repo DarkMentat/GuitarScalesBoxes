@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,14 +32,6 @@ public class ScalesOverview extends Activity
                     view = mInflater.inflate(R.layout.listviewitem, parent, false);
 
                 ((TextView) view.findViewById(R.id.listviewitem_tvText)).setText(this.getItem(position));
-                view.findViewById(R.id.listviewitem_tvText).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(ScalesOverview.this, SelectNote.class);
-                        i.putExtra("ScaleIndex", position);
-                        startActivity(i);
-                    }
-                });
                 view.findViewById(R.id.listviewitem_btnInfo).setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -49,6 +42,14 @@ public class ScalesOverview extends Activity
                     }
                 });
                 return view;
+            }
+        });
+        scales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(ScalesOverview.this, SelectNote.class);
+                i.putExtra("ScaleIndex", position);
+                startActivity(i);
             }
         });
     }
