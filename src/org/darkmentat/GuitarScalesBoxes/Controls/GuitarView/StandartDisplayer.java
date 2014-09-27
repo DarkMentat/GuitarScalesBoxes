@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.*;
 import org.darkmentat.GuitarScalesBoxes.R;
 
+import java.util.BitSet;
+
 import static org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.FretBoard.Note;
 
 class StandartDisplayer implements DisplayerFretBoard
@@ -21,6 +23,8 @@ class StandartDisplayer implements DisplayerFretBoard
 
     private int mActualFretWidth;
     private int mActualFretHeight;
+
+    private BitSet mSelectedFrets;
 
     private final Paint mPaint = new Paint(){{setFlags(FILTER_BITMAP_FLAG); }};
     private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(255,87,167,92)); setAntiAlias(true);}};
@@ -57,6 +61,7 @@ class StandartDisplayer implements DisplayerFretBoard
     }
     @Override public void setFretBoard(FretBoard fretBoard) {
         mFretBoard = fretBoard;
+        mSelectedFrets = new BitSet(fretBoard.FretCount);
     }
 
     private void updateScaleCoef() {
@@ -82,6 +87,25 @@ class StandartDisplayer implements DisplayerFretBoard
 
         mActualFretWidth = mActualFretTexture.getWidth();
         mActualFretHeight = mActualFretTexture.getHeight();
+    }
+
+    @Override public void selectFret(int fret) {
+        mSelectedFrets.set(fret);
+    }
+    @Override public void selectFretAtPoint(float point) {
+        selectFret(getFretAtPoint(point));
+    }
+    @Override public void unSelectAll() {
+        mSelectedFrets.clear();
+    }
+
+    @Override public int getFretAtPoint(float point) {
+        float fret = mActualFretWidth*mScaleCoef;
+        int res = (int) (point/fret - (mPegTexture2.getWidth()-mActualFretWidth)*mScaleCoef/fret);
+        return res < 0 ? 0 : res;
+    }
+    @Override public float getPointOfFret(int fret) {
+        return (mPegTexture2.getWidth() + (fret-1)*mActualFretWidth)*mScaleCoef;
     }
 
     @Override public int getWidth() {
@@ -137,6 +161,9 @@ class StandartDisplayer implements DisplayerFretBoard
                 canvas.drawText("XIX",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
             if(x == 22)
                 canvas.drawText("XXII",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-2, mTextFretNum);
+
+            if(mSelectedFrets.get(x))
+                canvas.drawText("S",mPegTexture2.getWidth() + (x-0.5f) * mActualFretWidth, mPegTexture1.getHeight()-18, mTextFretNum);
 
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {

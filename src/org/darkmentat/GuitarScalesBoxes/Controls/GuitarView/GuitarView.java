@@ -3,6 +3,7 @@ package org.darkmentat.GuitarScalesBoxes.Controls.GuitarView;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -24,6 +25,8 @@ public class GuitarView extends View implements OnGestureListener, Observer
     private int mOffset = 0;
     private final OverScroller mScroller = new OverScroller(getContext());
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
+    private boolean mFirstSelection = true;
+    private int mSelectedFret;
 
     public GuitarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -84,7 +87,27 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return false;
     }
     @Override public void onLongPress(MotionEvent e) {
+        if(mFirstSelection)
+        {
+            mDisplayer.unSelectAll();
+            mSelectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
+            mDisplayer.selectFret(mSelectedFret);
+        }
+        else
+        {
+            int selectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
+            int startFret = mSelectedFret < selectedFret ? mSelectedFret : selectedFret;
+            int endFret =   mSelectedFret > selectedFret ? mSelectedFret : selectedFret;
+            for(int i = startFret; i <= endFret; i++)
+                mDisplayer.selectFret(i);
 
+            mDisplayer.setMinFretCountOnScreen(endFret - startFret + 1);
+            mOffset = (int) mDisplayer.getPointOfFret(startFret);
+        }
+        mFirstSelection = !mFirstSelection;
+        mDisplayer.update();
+        invalidate();
+        ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
     }
     @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         mOffset += distanceX;
