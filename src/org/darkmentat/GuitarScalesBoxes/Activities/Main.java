@@ -38,7 +38,7 @@ public class Main extends Activity
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0,0,0, "Select scale");
         menu.add(0,1,1, "Select setting");
-
+        menu.add(0,2,2, "Cleanup all");
         return super.onCreateOptionsMenu(menu);
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,6 +49,10 @@ public class Main extends Activity
                 break;
             case 1:
                 startActivity(new Intent(this, SelectSetting.class));
+                break;
+            case 2:
+                GuitarModel.setBox(null);
+                GuitarModel.setScale(null);
                 break;
         }
         return super.onOptionsItemSelected(item);
