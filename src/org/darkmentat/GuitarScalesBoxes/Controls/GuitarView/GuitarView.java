@@ -27,6 +27,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
     private boolean mFirstSelection = true;
     private int mSelectedFret;
+    private OnFretIntervalSelectedListener mFretIntervalSelectedListener;
 
     public GuitarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,6 +55,9 @@ public class GuitarView extends View implements OnGestureListener, Observer
         if (getMeasuredWidth() > 0)
             mDisplayer.setMinFretCountOnScreen(mMinFretCountOnScreen);
         invalidate();
+    }
+    public void setOffsetFret(int fret){
+        mOffset = (int) mDisplayer.getPointOfFret(fret);
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -84,7 +88,10 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return true;
     }
     @Override public boolean onSingleTapUp(MotionEvent e) {
-        return false;
+        mDisplayer.unSelectAll();
+        mFirstSelection = true;
+        invalidate();
+        return true;
     }
     @Override public void onLongPress(MotionEvent e) {
         if(mFirstSelection)
@@ -101,8 +108,9 @@ public class GuitarView extends View implements OnGestureListener, Observer
             for(int i = startFret; i <= endFret; i++)
                 mDisplayer.selectFret(i);
 
-            mDisplayer.setMinFretCountOnScreen(endFret - startFret + 1);
-            mOffset = (int) mDisplayer.getPointOfFret(startFret);
+            if(mFretIntervalSelectedListener != null)
+                mFretIntervalSelectedListener.OnIntervalSelected(startFret,endFret);
+
         }
         mFirstSelection = !mFirstSelection;
         mDisplayer.update();
@@ -147,5 +155,9 @@ public class GuitarView extends View implements OnGestureListener, Observer
 
         if (!mScroller.isFinished())
             invalidate();
+    }
+
+    public void setOnFretIntervalSelectedListener(OnFretIntervalSelectedListener l){
+        mFretIntervalSelectedListener = l;
     }
 }

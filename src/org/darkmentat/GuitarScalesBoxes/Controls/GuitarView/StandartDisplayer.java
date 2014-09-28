@@ -97,6 +97,7 @@ class StandartDisplayer implements DisplayerFretBoard
     }
     @Override public void unSelectAll() {
         mSelectedFrets.clear();
+        updateCachedScreen();
     }
 
     @Override public int getFretAtPoint(float point) {
@@ -221,9 +222,11 @@ class StandartDisplayer implements DisplayerFretBoard
         canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnTonicNote);
     }
     private void drawOnScaleOnBoxNote(Canvas canvas, Note note, float x, float y){
-        //todo
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2, mCircleOnScaleNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnScaleNote);
     }
     private void drawOnTonicOnBoxNote(Canvas canvas, Note note, float x, float y){
-        //todo
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2,mCircleOnTonicNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextOnTonicNote);
     }
 }
