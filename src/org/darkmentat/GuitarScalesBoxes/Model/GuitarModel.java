@@ -81,7 +81,7 @@ public class GuitarModel extends FretBoard
         setChanged();
         notifyObservers();
     }
-    public void setBox(Point startPoint, int maxWidth){
-        setBox(new Box(this, Scale, startPoint, maxWidth));
+    public void setBox(int startFret, int endFret){
+        setBox(new Box(this, Scale, startFret, endFret));
     }
 }

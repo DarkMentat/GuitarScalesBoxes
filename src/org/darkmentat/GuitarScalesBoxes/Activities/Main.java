@@ -2,7 +2,6 @@ package org.darkmentat.GuitarScalesBoxes.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,9 +26,9 @@ public class Main extends Activity
             public void OnIntervalSelected(int startFret, int endFret) {
                 if(GuitarModel.Scale != null)
                 {
-                    GuitarModel.setBox(new Point(startFret, 5), endFret - startFret + 1);
+                    GuitarModel.setBox(startFret, endFret);
                     g.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
-                    g.setOffsetFret(startFret);
+                    g.setOffsetFret(GuitarModel.Box.StartFret);
                 }
             }
         });
