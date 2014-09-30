@@ -57,7 +57,10 @@ public class GuitarView extends View implements OnGestureListener, Observer
         invalidate();
     }
     public void setOffsetFret(int fret){
-        mOffset = (int) mDisplayer.getPointOfFret(fret);
+        if(fret < 0)
+            mOffset = 0;
+        else
+            mOffset = (int) mDisplayer.getPointOfFret(fret);
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

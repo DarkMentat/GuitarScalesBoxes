@@ -14,12 +14,14 @@ import org.darkmentat.GuitarScalesBoxes.R;
 public class Main extends Activity
 {
     public static final GuitarModel GuitarModel = new GuitarModel(GuitarSetting.Default, 24);
+    private GuitarView mGuitarView;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        final GuitarView g =(GuitarView) findViewById(R.id.main_gvGuitar);
+        mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
+        final GuitarView g = mGuitarView;
         g.setFretBoard(GuitarModel);
         g.setOnFretIntervalSelectedListener(new OnFretIntervalSelectedListener() {
             @Override
@@ -52,6 +54,8 @@ public class Main extends Activity
             case 2:
                 GuitarModel.setBox(null);
                 GuitarModel.setScale(null);
+                mGuitarView.setMinFretCountOnScreen(0);
+                mGuitarView.setOffsetFret(-1);
                 break;
         }
         return super.onOptionsItemSelected(item);
