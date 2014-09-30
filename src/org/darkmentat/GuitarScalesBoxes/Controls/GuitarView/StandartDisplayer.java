@@ -113,7 +113,7 @@ class StandartDisplayer implements DisplayerFretBoard
         return (int) (mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mActualFretWidth));
     }
     @Override public int getHeight() {
-        return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mActualFretHeight + 4));
+        return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mActualFretHeight));
     }
 
     private void updateCachedScreen() {
@@ -128,7 +128,7 @@ class StandartDisplayer implements DisplayerFretBoard
         if(mScaleCoef > 1.75f)
             mScaleCoef = 1.75f;
 
-        canvas.scale(mScaleCoef,mScaleCoef);
+        canvas.scale(mScaleCoef,mScaleCoef, 0, getHeight()/2);
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), mPaint);
