@@ -1,6 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
-import android.app.Activity;
+import org.holoeverywhere.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import org.darkmentat.GuitarScalesBoxes.R;

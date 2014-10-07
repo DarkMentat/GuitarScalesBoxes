@@ -1,6 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
-import android.app.Activity;
+import org.holoeverywhere.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
