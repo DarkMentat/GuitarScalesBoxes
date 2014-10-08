@@ -1,6 +1,5 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
-import org.holoeverywhere.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.OnFretIntervalSelect
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarModel;
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
 import org.darkmentat.GuitarScalesBoxes.R;
+import org.holoeverywhere.app.Activity;
 
 public class Main extends Activity
 {
@@ -37,21 +37,20 @@ public class Main extends Activity
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0,0,0, "Select scale");
-        menu.add(0,1,1, "Select setting");
-        menu.add(0,2,2, "Cleanup all");
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case 0:
+            case R.id.main_mSelectScale:
                 startActivity(new Intent(this, ScalesOverview.class));
                 break;
-            case 1:
+            case R.id.main_mSelectSetting:
                 startActivity(new Intent(this, SelectSetting.class));
                 break;
-            case 2:
+            case R.id.main_mCleanUpAll:
                 GuitarModel.setBox(null);
                 GuitarModel.setScale(null);
                 mGuitarView.setMinFretCountOnScreen(0);

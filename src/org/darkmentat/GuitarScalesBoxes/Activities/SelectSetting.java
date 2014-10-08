@@ -34,14 +34,14 @@ public class SelectSetting extends Activity
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0,0,0, "Custom setting");
+        getMenuInflater().inflate(R.menu.selectsetting, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case 0:
+            case R.id.selectsetting_mCustomSetting:
                 startActivity(new Intent(this, CreateCustomSetting.class));
                 break;
         }

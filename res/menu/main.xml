@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item   android:id="@+id/main_mSelectScale"
+            android:title="Select scale"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:showAsAction="always"/>
+
+    <item   android:id="@+id/main_mSelectSetting"
+            android:title="Select setting"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:showAsAction="always" />
+
+    <item   android:id="@+id/main_mCleanUpAll"
+            android:title="Cleanup all"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:showAsAction="always" />
+</menu>
