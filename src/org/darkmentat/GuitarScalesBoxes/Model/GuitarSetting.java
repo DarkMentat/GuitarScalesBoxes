@@ -1,59 +1,45 @@
 package org.darkmentat.GuitarScalesBoxes.Model;
 
-import static org.darkmentat.GuitarScalesBoxes.Model.NoteModel.*;
+import org.darkmentat.GuitarScalesBoxes.Activities.Main;
+import org.darkmentat.GuitarScalesBoxes.R;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static org.darkmentat.GuitarScalesBoxes.Model.NoteModel.NoteValue;
 
 public final class GuitarSetting
 {
-    static{
-        Default = new GuitarSetting(new NoteModel[]{
-                new NoteModel(NoteValue.E, 4),
-                new NoteModel(NoteValue.H, 3),
-                new NoteModel(NoteValue.G, 3),
-                new NoteModel(NoteValue.D, 3),
-                new NoteModel(NoteValue.A, 2),
-                new NoteModel(NoteValue.E, 2),
-        }, "Default");
-        HalfStepDown = new GuitarSetting(new NoteModel[]{
-                new NoteModel(NoteValue.Dd, 4),
-                new NoteModel(NoteValue.Ad, 3),
-                new NoteModel(NoteValue.Fd, 3),
-                new NoteModel(NoteValue.Cd, 3),
-                new NoteModel(NoteValue.Gd, 2),
-                new NoteModel(NoteValue.Dd, 2),
-        }, "Half Step Down");
-        OneStepDown = new GuitarSetting(new NoteModel[]{
-                new NoteModel(NoteValue.D, 4),
-                new NoteModel(NoteValue.A, 3),
-                new NoteModel(NoteValue.F, 3),
-                new NoteModel(NoteValue.C, 3),
-                new NoteModel(NoteValue.G, 2),
-                new NoteModel(NoteValue.D, 2),
-        }, "One Step Down");
-        DropD = new GuitarSetting(new NoteModel[]{
-                new NoteModel(NoteValue.E, 4),
-                new NoteModel(NoteValue.H, 3),
-                new NoteModel(NoteValue.G, 3),
-                new NoteModel(NoteValue.D, 3),
-                new NoteModel(NoteValue.A, 2),
-                new NoteModel(NoteValue.D, 2),
-        }, "Drop D");
-        DropC = new GuitarSetting(new NoteModel[]{
-                new NoteModel(NoteValue.D, 4),
-                new NoteModel(NoteValue.A, 3),
-                new NoteModel(NoteValue.F, 3),
-                new NoteModel(NoteValue.C, 3),
-                new NoteModel(NoteValue.G, 2),
-                new NoteModel(NoteValue.C, 2),
-        }, "Drop C");
+    public static GuitarSetting parseJson(String json) throws JSONException {
+        JSONObject jSetting = new JSONObject(json);
+        String name = jSetting.getString("Name");
+        JSONArray jNotes = jSetting.getJSONArray("Notes");
+        NoteModel[] notes = new NoteModel[jNotes.length()];
+        for (int i = 0; i < jNotes.length(); i++)
+        {
+            JSONObject jNote = jNotes.getJSONObject(i);
+            String value = jNote.getString("Value");
+            int octave = jNote.getInt("Octave");
+            notes[i] = new NoteModel(NoteValue.valueOf(value), octave);
+        }
+        return new GuitarSetting(notes, name);
     }
 
-    public static final GuitarSetting Default;
-    public static final GuitarSetting HalfStepDown;
-    public static final GuitarSetting OneStepDown;
-    public static final GuitarSetting DropD;
-    public static final GuitarSetting DropC;
+    public static GuitarSetting[] Settings;
+    static{
+        String[] settings = Main.CurrentInstance.getApplicationContext().getResources().getStringArray(R.array.GuitarSettings);
 
-    public static GuitarSetting[] Settings = new GuitarSetting[]{Default, HalfStepDown, OneStepDown, DropD, DropC};
+        Settings = new GuitarSetting[settings.length];
+        try
+        {
+            for (int i = 0; i < settings.length; i++)
+                Settings[i] = parseJson(settings[i]);
+        }
+        catch (JSONException e)
+        {
+            throw new RuntimeException("Bad json!!");
+        }
+    }
 
     public final int StringCount;
     public final NoteModel[] StartNotes;

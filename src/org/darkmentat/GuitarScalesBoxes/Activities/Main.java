@@ -13,13 +13,15 @@ import org.holoeverywhere.app.Activity;
 
 public class Main extends Activity
 {
-    public static final GuitarModel GuitarModel = new GuitarModel(GuitarSetting.Default, 24);
+    public static Activity CurrentInstance;
+    public static GuitarModel GuitarModel;
     private GuitarView mGuitarView;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        CurrentInstance = this;
+        GuitarModel = new GuitarModel(GuitarSetting.Settings[0], 24);
         mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
         final GuitarView g = mGuitarView;
         g.setFretBoard(GuitarModel);

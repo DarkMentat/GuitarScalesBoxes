@@ -2,6 +2,94 @@
 <resources>
     <string name="app_name">GuitarScalesBoxes</string>
 
+    <string-array name="GuitarSettings">
+        <item>
+            {
+                \"Name\" : \"7-string Default\",
+                \"Notes\":
+                [
+                    {\"Value\" : \"E\" ,  Octave : 4},
+                    {\"Value\" : \"H\" ,  Octave : 3},
+                    {\"Value\" : \"G\" ,  Octave : 3},
+                    {\"Value\" : \"D\" ,  Octave : 3},
+                    {\"Value\" : \"A\" ,  Octave : 2},
+                    {\"Value\" : \"E\" ,  Octave : 2},
+                    {\"Value\" : \"H\" ,  Octave : 1}
+                ]
+            }
+        </item>
+        <item>
+            {
+            \"Name\" : \"6-string Default\",
+            \"Notes\":
+                [
+                    {\"Value\" : \"E\" ,  Octave : 4},
+                    {\"Value\" : \"H\" ,  Octave : 3},
+                    {\"Value\" : \"G\" ,  Octave : 3},
+                    {\"Value\" : \"D\" ,  Octave : 3},
+                    {\"Value\" : \"A\" ,  Octave : 2},
+                    {\"Value\" : \"E\" ,  Octave : 2}
+                ]
+            }
+        </item>
+        <item>
+            {
+                \"Name\" : \"Half step down\",
+                \"Notes\":
+                [
+                    {\"Value\" : \"Dd\" ,  Octave : 4},
+                    {\"Value\" : \"Ad\" ,  Octave : 3},
+                    {\"Value\" : \"Fd\" ,  Octave : 3},
+                    {\"Value\" : \"Cd\" ,  Octave : 3},
+                    {\"Value\" : \"Gd\" ,  Octave : 2},
+                    {\"Value\" : \"Dd\" ,  Octave : 2}
+                ]
+            }
+        </item>
+        <item>
+            {
+                \"Name\" : \"One step down\",
+                \"Notes\":
+                [
+                    {\"Value\" : \"D\" ,  Octave : 4},
+                    {\"Value\" : \"A\" ,  Octave : 3},
+                    {\"Value\" : \"F\" ,  Octave : 3},
+                    {\"Value\" : \"C\" ,  Octave : 3},
+                    {\"Value\" : \"G\" ,  Octave : 2},
+                    {\"Value\" : \"D\" ,  Octave : 2}
+                ]
+            }
+        </item>
+        <item>
+            {
+            \"Name\" : \"Drop D\",
+            \"Notes\":
+                [
+                    {\"Value\" : \"E\" ,  Octave : 4},
+                    {\"Value\" : \"H\" ,  Octave : 3},
+                    {\"Value\" : \"G\" ,  Octave : 3},
+                    {\"Value\" : \"D\" ,  Octave : 3},
+                    {\"Value\" : \"A\" ,  Octave : 2},
+                    {\"Value\" : \"D\" ,  Octave : 2}
+                ]
+            }
+        </item>
+        <item>
+            {
+            \"Name\" : \"Drop C\",
+            \"Notes\":
+                [
+                    {\"Value\" : \"D\" ,  Octave : 4},
+                    {\"Value\" : \"A\" ,  Octave : 3},
+                    {\"Value\" : \"F\" ,  Octave : 3},
+                    {\"Value\" : \"C\" ,  Octave : 3},
+                    {\"Value\" : \"G\" ,  Octave : 2},
+                    {\"Value\" : \"C\" ,  Octave : 2}
+                ]
+            }
+        </item>
+    </string-array>
+
     <string-array name="scale_Names">
         <item>"Chromatic scale"</item>
         <item>"Natural minor"</item>
