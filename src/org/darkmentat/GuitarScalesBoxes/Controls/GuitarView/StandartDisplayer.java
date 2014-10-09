@@ -42,6 +42,8 @@ class StandartDisplayer implements DisplayerFretBoard
     private int mScreenWidth;
     private int mScreenHeight;
 
+    private float mTopOffset=0f;
+
     public StandartDisplayer(Context context) {
         mFretTexture = BitmapFactory.decodeResource(context.getResources(), R.drawable.gv_fret);
         mPegTexture1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.gv_peg01);
@@ -58,6 +60,7 @@ class StandartDisplayer implements DisplayerFretBoard
 
     @Override public void update() {
         mCachedScreenNeedsUpdate = true;
+        updateScaleCoef();
     }
     @Override public void setFretBoard(FretBoard fretBoard) {
         mFretBoard = fretBoard;
@@ -66,7 +69,26 @@ class StandartDisplayer implements DisplayerFretBoard
 
     private void updateScaleCoef() {
         mScaleCoef = 1.0f;
-        mScaleCoef = mScreenHeight / (float) getHeight();
+        if(mScreenHeight > getHeight())
+        {
+            mScaleCoef = 1.0f;
+            mScaleCoef = mScreenHeight / getHeight();
+            mTopOffset = 0f;
+        }
+        else if(mScreenHeight < getMinimalHeight())
+        {
+            mScaleCoef = 1.0f;
+            mTopOffset = (getHeight() - getMinimalHeight())/2f;
+            mScaleCoef = mScreenHeight / getMinimalHeight();
+        }
+        else
+        {
+            mScaleCoef = 1.0f;
+            mTopOffset = (getHeight() - mScreenHeight)/2f;
+        }
+
+//        if(mScaleCoef > 2f)
+//            mScaleCoef = 2f;
     }
     @Override public void setScreenSize(int width, int height) {
         mScreenWidth = width;
@@ -109,26 +131,27 @@ class StandartDisplayer implements DisplayerFretBoard
         return (mPegTexture2.getWidth() + (fret-1)*mActualFretWidth)*mScaleCoef;
     }
 
-    @Override public int getWidth() {
-        return (int) (mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mActualFretWidth));
+    @Override public float getWidth() {
+        return mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mActualFretWidth);
     }
-    @Override public int getHeight() {
-        return (int) (mScaleCoef *(mPegTexture1.getHeight() + mFretBoard.StringCount * mActualFretHeight));
+    @Override public float getHeight() {
+        return getMinimalHeight() + mScaleCoef *(mPegTexture1.getHeight() + mPegTexture6.getHeight());
+    }
+    public float getMinimalHeight() {
+        return mScaleCoef *(mFretBoard.StringCount * mActualFretHeight);
     }
 
     private void updateCachedScreen() {
-        updateScaleCoef();
-        mCachedScreen = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        mCachedScreen = Bitmap.createBitmap((int) getWidth(), (int) getHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(mCachedScreen);
         drawStatic(c);
         mCachedScreenNeedsUpdate = false;
     }
     private void drawStatic(Canvas canvas){
         canvas.save();
-        if(mScaleCoef > 1.75f)
-            mScaleCoef = 1.75f;
 
-        canvas.scale(mScaleCoef,mScaleCoef, 0, getHeight()/2);
+        canvas.scale(mScaleCoef, mScaleCoef);
+        canvas.translate(0, -mTopOffset);
 
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), mPaint);
@@ -178,7 +201,7 @@ class StandartDisplayer implements DisplayerFretBoard
     @Override public void draw(Canvas canvas) {
         if(mFretBoard == null) return;
 
-        if(mCachedScreen != null && mCachedScreen.getWidth() > 4096) //fuck
+        if(mCachedScreen != null && mCachedScreen.getWidth() > 2048) //fuck
             drawStatic(canvas);
         else
         {

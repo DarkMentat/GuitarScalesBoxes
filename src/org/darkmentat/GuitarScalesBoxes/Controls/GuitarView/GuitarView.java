@@ -70,7 +70,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
     }
 
     @Override protected int computeHorizontalScrollRange() {
-        return mDisplayer.getWidth();
+        return (int) mDisplayer.getWidth();
     }
     @Override protected int computeHorizontalScrollOffset() {
         return mOffset;
@@ -127,7 +127,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return true;
     }
     @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        mScroller.fling(mOffset, 0, (int) -velocityX, 0, 0, mDisplayer.getWidth() - getMeasuredWidth(), 0, 0);
+        mScroller.fling(mOffset, 0, (int) -velocityX, 0, 0, (int) (mDisplayer.getWidth() - getMeasuredWidth()), 0, 0);
         invalidate();
         return true;
     }
@@ -136,7 +136,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
         if(mOffset < 0)
             return 0;
         if(mOffset > mDisplayer.getWidth() - getMeasuredWidth())
-            return mDisplayer.getWidth() - getMeasuredWidth();
+            return (int) (mDisplayer.getWidth() - getMeasuredWidth());
 
         return mOffset;
     }
