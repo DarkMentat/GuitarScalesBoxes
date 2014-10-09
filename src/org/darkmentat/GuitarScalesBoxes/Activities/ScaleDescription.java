@@ -1,5 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
+import org.darkmentat.GuitarScalesBoxes.Model.ScaleDefinition;
 import org.holoeverywhere.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ public class ScaleDescription extends Activity
 
         int scaleIndex = getIntent().getIntExtra("ScaleIndex", 0);
 
-        ((TextView) findViewById(R.id.scaledescription_tvName)).setText(getResources().getStringArray(R.array.scale_Names)[scaleIndex]);
-        ((TextView) findViewById(R.id.scaledescription_tvDescription)).setText(getResources().getStringArray(R.array.scale_Descriptions)[scaleIndex]);
+        ((TextView) findViewById(R.id.scaledescription_tvName)).setText(ScaleDefinition.Scales[scaleIndex].Name);
+        ((TextView) findViewById(R.id.scaledescription_tvDescription)).setText(ScaleDefinition.Scales[scaleIndex].Description);
     }
 }

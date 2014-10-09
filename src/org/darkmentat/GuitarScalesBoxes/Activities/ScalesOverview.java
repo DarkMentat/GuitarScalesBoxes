@@ -1,5 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
+import org.darkmentat.GuitarScalesBoxes.Model.ScaleDefinition;
 import org.holoeverywhere.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +22,7 @@ public class ScalesOverview extends Activity
         setContentView(R.layout.scalesoverview);
 
         ListView scales = (ListView) findViewById(R.id.scalesoverview_lvScales);
-        scales.setAdapter(new ArrayAdapter<String>(this, R.layout.scalesoverview_item, getResources().getStringArray(R.array.scale_Names))
+        scales.setAdapter(new ArrayAdapter<String>(this, R.layout.scalesoverview_item, ScaleDefinition.ScaleNames)
         {
             private LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

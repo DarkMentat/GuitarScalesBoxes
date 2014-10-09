@@ -1,5 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
+import org.darkmentat.GuitarScalesBoxes.Model.ScaleDefinition;
 import org.holoeverywhere.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class SelectNote extends Activity
         notes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Main.GuitarModel.setScale(new Scale(NoteValue.values()[position], getResources().getStringArray(R.array.scale_stepSequences)[scale]));
+                Main.GuitarModel.setScale(new Scale(NoteValue.values()[position], ScaleDefinition.Scales[scale].StepSequence));
                 finish();
 
                 Intent i = new Intent(SelectNote.this, Main.class);
