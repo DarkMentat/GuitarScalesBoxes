@@ -3,6 +3,19 @@ package org.darkmentat.GuitarScalesBoxes.Model;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.FretBoard;
 
 public final class NoteModel extends FretBoard.Note implements Comparable<NoteModel>{
+    public enum NoteOctave{
+        SubContra,
+        Contra,
+        Great,
+        Small,
+        OneLine,
+        TwoLine,
+        ThreeLine;
+
+        @Override public String toString() {
+            return String.valueOf(ordinal());
+       }
+    }
     public enum NoteValue{
         C, Cd, D, Dd, E, F, Fd, G, Gd, A, Ad, H;
 
@@ -14,19 +27,22 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
     private NoteValue[] mNoteValues = NoteValue.values();
 
     public final NoteValue Value;
-    public final int Octave;       // todo Octave to enum
+    public final NoteOctave Octave;
 
     public NoteModel(NoteValue value, int octave) {
         this(FretBoard.NoteQuality.OnBoard, value, octave);
     }
     public NoteModel(FretBoard.NoteQuality quality, NoteValue value, int octave) {
+        this(quality, value, NoteOctave.values()[octave]);
+    }
+    public NoteModel(FretBoard.NoteQuality quality, NoteValue value, NoteOctave octave) {
         super(quality, value.toString());
         Value = value;
         Octave = octave;
     }
 
     public NoteModel getNext(){
-        int octave = Octave;
+        int octave = Octave.ordinal();
         NoteValue value = Value;
         if(value.ordinal() == mNoteValues.length-1)
         {
@@ -41,7 +57,7 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
 
     @Override public int hashCode() {
         int result = Value.hashCode();
-        result = 31 * result + Octave;
+        result = 31 * result + Octave.ordinal();
         return result;
     }
     @Override public boolean equals(Object o) {
@@ -63,13 +79,14 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
     @Override public int compareTo(NoteModel another) {
         if( another == null) return 1;
 
-        if(Octave > another.Octave) return 1;
-        if(Octave < another.Octave) return -1;
+        int octaveCmp = Octave.compareTo(another.Octave);
 
-        return Value.compareTo(another.Value);
+        if (octaveCmp != 0)
+            return Value.compareTo(another.Value);
+        return octaveCmp;
     }
 
     @Override public String toString() {
-        return Value.toString()+ Octave;
+        return Value.toString()+ Octave.toString();
     }
 }
