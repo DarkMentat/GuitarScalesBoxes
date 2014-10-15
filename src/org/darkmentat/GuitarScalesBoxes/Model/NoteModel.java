@@ -54,6 +54,9 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
 
         return new NoteModel(value, octave);
     }
+    public int getWeight(){
+        return Octave.ordinal()*12 + Value.ordinal();
+    }
 
     @Override public int hashCode() {
         int result = Value.hashCode();
