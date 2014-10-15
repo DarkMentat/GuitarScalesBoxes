@@ -59,9 +59,7 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
     }
 
     @Override public int hashCode() {
-        int result = Value.hashCode();
-        result = 31 * result + Octave.ordinal();
-        return result;
+        return 31 * Value.hashCode() + Octave.hashCode();
     }
     @Override public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,7 +82,7 @@ public final class NoteModel extends FretBoard.Note implements Comparable<NoteMo
 
         int octaveCmp = Octave.compareTo(another.Octave);
 
-        if (octaveCmp != 0)
+        if (octaveCmp == 0)
             return Value.compareTo(another.Value);
         return octaveCmp;
     }
