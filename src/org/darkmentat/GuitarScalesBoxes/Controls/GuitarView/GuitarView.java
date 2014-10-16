@@ -26,6 +26,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
     private final OverScroller mScroller = new OverScroller(getContext());
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
     private boolean mFirstSelection = true;
+    private boolean mFretSelected = false;
     private int mSelectedFret;
     private OnFretIntervalSelectedListener mFretIntervalSelectedListener;
 
@@ -91,17 +92,21 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return true;
     }
     @Override public boolean onSingleTapUp(MotionEvent e) {
-        mDisplayer.unSelectAll();
-        mFirstSelection = true;
-        invalidate();
-        return true;
-    }
-    @Override public void onLongPress(MotionEvent e) {
         if(mFirstSelection)
         {
-            mDisplayer.unSelectAll();
-            mSelectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
-            mDisplayer.selectFret(mSelectedFret);
+            if(mFretSelected)
+            {
+                mDisplayer.unSelectAll();
+                mFretSelected = false;
+            }
+            else
+            {
+                mDisplayer.unSelectAll();
+                mSelectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
+                mDisplayer.selectFret(mSelectedFret);
+                mFretSelected = true;
+                mFirstSelection = false;
+            }
         }
         else
         {
@@ -113,11 +118,15 @@ public class GuitarView extends View implements OnGestureListener, Observer
 
             if(mFretIntervalSelectedListener != null)
                 mFretIntervalSelectedListener.OnIntervalSelected(startFret,endFret);
-
+            mFretSelected = true;
+            mFirstSelection = true;
         }
-        mFirstSelection = !mFirstSelection;
+
         mDisplayer.update();
         invalidate();
+        return true;
+    }
+    @Override public void onLongPress(MotionEvent e) {
         ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
     }
     @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
