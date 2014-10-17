@@ -18,6 +18,8 @@ public class Box
 
         Map<NoteModel, List<Point>> points = new TreeMap<>();
 
+        NoteModel startNote = null;
+
         for(int y = fretBoard.StringCount-1; y >= 0; y--)
             for(int x = 0; x < fretBoard.FretCount; x++)
             {
@@ -28,6 +30,12 @@ public class Box
 
                 if(scale.isNoteOnScale(note))
                 {
+                    if(startNote == null)
+                        startNote = note;
+
+                    if(note.compareTo(startNote) < 0)
+                        continue;
+
                     if(!points.containsKey(note))
                         points.put(note, new ArrayList<Point>());
                     points.get(note).add(new Point(x,y));
