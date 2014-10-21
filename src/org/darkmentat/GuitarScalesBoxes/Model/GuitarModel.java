@@ -9,6 +9,9 @@ public class GuitarModel extends FretBoard
     public Box Box;
     public GuitarSetting Setting;
 
+    private Point mSelectedNote;
+    private NoteQuality mPreviousQualityOfSelectedNote;
+
     public GuitarModel(GuitarSetting setting, int fretCount) {
         super(setting.StringCount, fretCount);
 
@@ -83,5 +86,20 @@ public class GuitarModel extends FretBoard
     }
     public void setBox(int startFret, int endFret){
         setBox(new Box(this, Scale, startFret, endFret));
+    }
+
+    public void selectNote(Point position){
+        unSelectNote();
+        mSelectedNote = position;
+        mPreviousQualityOfSelectedNote = Tab[position.x][position.y].Quality;
+        Tab[position.x][position.y].Quality = NoteQuality.Selected;
+        setChanged();
+        notifyObservers();
+    }
+    public void unSelectNote(){
+        if(mPreviousQualityOfSelectedNote == null) return;
+        Tab[mSelectedNote.x][mSelectedNote.y].Quality = mPreviousQualityOfSelectedNote;
+        setChanged();
+        notifyObservers();
     }
 }

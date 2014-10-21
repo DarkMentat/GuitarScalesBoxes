@@ -6,7 +6,7 @@ public abstract class FretBoard extends Observable
 {
     public static enum NoteQuality
     {
-        OnBoard, OnScale, OnTonic, OnScaleOnBox, OnTonicOnBox
+        OnBoard, OnScale, OnTonic, OnScaleOnBox, OnTonicOnBox, Selected
     }
     public static class Note
     {

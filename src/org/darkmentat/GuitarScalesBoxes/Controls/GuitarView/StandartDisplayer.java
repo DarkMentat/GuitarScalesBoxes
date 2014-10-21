@@ -29,9 +29,11 @@ class StandartDisplayer implements DisplayerFretBoard
     private final Paint mPaint = new Paint(){{setFlags(FILTER_BITMAP_FLAG); }};
     private final Paint mCircleOnScaleNote = new Paint(){{setColor(Color.argb(255,87,167,92)); setAntiAlias(true);}};
     private final Paint mCircleOnTonicNote = new Paint(){{setColor(Color.argb(255,12,128,0)); setAntiAlias(true);}};
+    private final Paint mCircleSelectedNote = new Paint(){{setColor(Color.argb(255,229,87,72)); setAntiAlias(true);}};
     private final Paint mCircleOnBoardNote = new Paint(){{setColor(Color.argb(255,255,240,168)); setAntiAlias(true);}};
     private final Paint mTextOnScaleNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
     private final Paint mTextOnTonicNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
+    private final Paint mTextSelectedNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
     private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(255,166,145,47)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
     private final Paint mTextFretNum = new Paint(){{setColor(Color.argb(255,255,236,145)); setTextAlign(Align.CENTER); setTextSize(20); setAntiAlias(true);}};
     private final Paint mSelection = new Paint(){{ setColor(Color.argb(80,20,20,255)); setStrokeWidth(0); }};
@@ -252,8 +254,16 @@ class StandartDisplayer implements DisplayerFretBoard
             case OnTonicOnBox:
                 drawOnTonicOnBoxNote(canvas, note, x, y);
                 break;
+            case Selected:
+                drawSelectedNote(canvas, note, x, y);
+                break;
         }
 
+    }
+
+    private void drawSelectedNote(Canvas canvas, Note note, float x, float y) {
+        canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2.55f,mCircleSelectedNote);
+        canvas.drawText(note.DisplayName, x+ mActualFretWidth /2, y+ mActualFretHeight /2+ mActualFretHeight /5.5f, mTextSelectedNote);
     }
     private void drawOnBoardNote(Canvas canvas, Note note, float x, float y){
         canvas.drawCircle(x+ mActualFretWidth /2,y+ mActualFretHeight /2, mActualFretHeight /2.75f,mCircleOnBoardNote);
