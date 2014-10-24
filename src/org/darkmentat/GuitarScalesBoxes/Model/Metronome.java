@@ -10,8 +10,14 @@ import java.util.concurrent.TimeUnit;
 
 public class Metronome implements Runnable
 {
-    public boolean PlayScale = true;
-    public boolean Tick;
+    public enum PlayStyle {
+        Sound, Tick, TickWithAccents
+    }
+
+    public static final String MetronomeTick = "m1";
+    public static final String MetronomeAccentedTick = "m2";
+
+    public PlayStyle Style = PlayStyle.Tick;
 
     private ScheduledExecutorService mExecutor;
     private ScheduledFuture<?> mScheduledFuture;
@@ -51,9 +57,15 @@ public class Metronome implements Runnable
             }
             final Point p = Main.GuitarModel.Box.Points.get(mCurrent);
 
-            if(PlayScale)
-                mSoundPlayer.play((NoteModel) Main.GuitarModel.Tab[p.x][p.y]);
-
+            switch (Style)
+            {
+                case Sound:
+                    mSoundPlayer.play((NoteModel) Main.GuitarModel.Tab[p.x][p.y]);
+                    break;
+                case Tick:
+                    mSoundPlayer.play(MetronomeTick);
+                    break;
+            }
             Main.CurrentInstance.Handler.post(new Runnable()
             {
                 @Override public void run() { Main.GuitarModel.selectNote(p); }

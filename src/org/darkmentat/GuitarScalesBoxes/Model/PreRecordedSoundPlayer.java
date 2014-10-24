@@ -14,9 +14,12 @@ public class PreRecordedSoundPlayer implements SoundPlayer
 
     @Override public void init() {
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
-        mSoundPoolMap = new HashMap<>(3);
+        mSoundPoolMap = new HashMap<>(65);
 
         //region Forming SoundPoolMap
+        mSoundPoolMap.put("m1" , mSoundPool.load(Main.CurrentInstance, R.raw.m1,  1) );
+        mSoundPoolMap.put("m2" , mSoundPool.load(Main.CurrentInstance, R.raw.m2,  1) );
+
         mSoundPoolMap.put("A1" , mSoundPool.load(Main.CurrentInstance, R.raw.a1,  1) );
         mSoundPoolMap.put("A#1", mSoundPool.load(Main.CurrentInstance, R.raw.ad1, 1) );
         mSoundPoolMap.put("H1" , mSoundPool.load(Main.CurrentInstance, R.raw.h1,  1) );
@@ -87,8 +90,11 @@ public class PreRecordedSoundPlayer implements SoundPlayer
         mSoundPoolMap.put("H6" , mSoundPool.load(Main.CurrentInstance, R.raw.h6,  1) );
         //endregion
     }
-    @Override public void play(NoteModel note) {
+    @Override public void play(String key) {
         mSoundPool.autoPause();
-        mSoundPool.play(mSoundPoolMap.get(note.toString()), 1f, 1f, 1, 0, 1f);
+        mSoundPool.play(mSoundPoolMap.get(key), 1f, 1f, 1, 0, 1f);
+    }
+    @Override public void play(NoteModel note) {
+        play(note.toString());
     }
 }
