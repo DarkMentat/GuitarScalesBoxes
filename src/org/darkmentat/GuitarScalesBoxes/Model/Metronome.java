@@ -17,14 +17,15 @@ public class Metronome implements Runnable
     public static final String MetronomeTick = "m1";
     public static final String MetronomeAccentedTick = "m2";
 
-    public PlayStyle Style = PlayStyle.Tick;
+    public PlayStyle Style = PlayStyle.Sound;
+    public boolean Looped = true;
 
     private ScheduledExecutorService mExecutor;
     private ScheduledFuture<?> mScheduledFuture;
     private SoundPlayer mSoundPlayer;
 
     private int mCurrent = 0;
-
+    private int mPlayDirection = +1;
     public Metronome() {
         mExecutor = Executors.newSingleThreadScheduledExecutor();
 
@@ -50,10 +51,19 @@ public class Metronome implements Runnable
     public void run() {
         try
         {
-            if (mCurrent >= Main.GuitarModel.Box.Points.size())
+            if (mCurrent >= Main.GuitarModel.Box.Points.size() || mCurrent < 0)
             {
-                stop();
-                return;
+                if(Looped)
+                {
+                    mPlayDirection *= -1;
+                    mCurrent += mPlayDirection;
+                    mCurrent += mPlayDirection;
+                }
+                else
+                {
+                    stop();
+                    return;
+                }
             }
             final Point p = Main.GuitarModel.Box.Points.get(mCurrent);
 
@@ -71,7 +81,7 @@ public class Metronome implements Runnable
                 @Override public void run() { Main.GuitarModel.selectNote(p); }
             });
 
-            mCurrent++;
+            mCurrent += mPlayDirection;
         }
         catch (final Exception e)
         {
