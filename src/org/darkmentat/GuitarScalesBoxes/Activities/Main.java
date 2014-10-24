@@ -1,22 +1,20 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.OnFretIntervalSelectedListener;
-import org.darkmentat.GuitarScalesBoxes.Model.*;
+import org.darkmentat.GuitarScalesBoxes.Model.GuitarModel;
+import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
+import org.darkmentat.GuitarScalesBoxes.Model.Metronome;
 import org.darkmentat.GuitarScalesBoxes.R;
 import org.holoeverywhere.app.Activity;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-public class Main extends Activity
+public class Main extends Activity implements OnFretIntervalSelectedListener, ActionMode.Callback
 {
     public static Main CurrentInstance;
     public static GuitarModel GuitarModel;
@@ -24,7 +22,7 @@ public class Main extends Activity
     public Handler Handler = new Handler();
 
     private GuitarView mGuitarView;
-    private SoundPlayer mSoundPlayer;
+    private Metronome mMetronome;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -32,23 +30,17 @@ public class Main extends Activity
         CurrentInstance = this;
         GuitarModel = new GuitarModel(GuitarSetting.Settings[0], 24);
         mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
-        final GuitarView g = mGuitarView;
-        g.setFretBoard(GuitarModel);
-        g.setOnFretIntervalSelectedListener(new OnFretIntervalSelectedListener()
+        mGuitarView.setFretBoard(GuitarModel);
+        mGuitarView.setOnFretIntervalSelectedListener(this);
+        mMetronome = new Metronome();
+    }
+    @Override public void OnIntervalSelected(int startFret, int endFret) {
+        if (GuitarModel.Scale != null)
         {
-            @Override
-            public void OnIntervalSelected(int startFret, int endFret) {
-                if (GuitarModel.Scale != null)
-                {
-                    GuitarModel.setBox(startFret, endFret);
-                    g.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
-                    g.setOffsetFret(GuitarModel.Box.StartFret);
-                }
-            }
-        });
-
-        mSoundPlayer = new PreRecordedSoundPlayer();
-        mSoundPlayer.init();
+            GuitarModel.setBox(startFret, endFret);
+            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
+            mGuitarView.setOffsetFret(GuitarModel.Box.StartFret);
+        }
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,38 +64,35 @@ public class Main extends Activity
                 mGuitarView.setOffsetFret(-1);
                 break;
             case R.id.main_mIterateBox:
-                final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-                executor.scheduleAtFixedRate(new Runnable() {
-                    private int mCurrent = 0;
-                    @Override
-                    public void run() {
-                        try
-                        {
-                            if (mCurrent >= GuitarModel.Box.Points.size())
-                            {
-                                Main.CurrentInstance.Handler.post(new Runnable() {
-                                    @Override public void run() { GuitarModel.unSelectNote();
-                                    }});
-                                executor.shutdown();
-                                return;
-                            }
-                            final Point p = GuitarModel.Box.Points.get(mCurrent);
 
-                            mSoundPlayer.play((NoteModel) GuitarModel.Tab[p.x][p.y]);
-                            Main.CurrentInstance.Handler.post(new Runnable() {
-                                @Override public void run() { GuitarModel.selectNote(p); }});
+                startSupportActionMode(this);
 
-                            mCurrent++;
-                        }catch (final Exception e)
-                        {
-                            Main.CurrentInstance.Handler.post(new Runnable() {
-                                @Override public void run() { throw e;
-                                }});
-                        }
-                    }
-                }, 0, 500, TimeUnit.MILLISECONDS);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        mode.getMenuInflater().inflate(R.menu.metronome, menu);
+        return true;
+    }
+    @Override public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+    @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.main_mMetronomePlay:
+                mMetronome.play(200);
+            break;
+            case R.id.main_mMetronomeStop:
+                mMetronome.stop();
+                break;
+        }
+
+        return true;
+    }
+    @Override public void onDestroyActionMode(ActionMode mode) {
+        mMetronome.stop();
     }
 }
