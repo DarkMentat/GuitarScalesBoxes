@@ -113,6 +113,17 @@ public class GuitarView extends View implements OnGestureListener, Observer
             int selectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
             int startFret = mSelectedFret < selectedFret ? mSelectedFret : selectedFret;
             int endFret =   mSelectedFret > selectedFret ? mSelectedFret : selectedFret;
+
+            if(startFret == endFret)
+            {
+                mDisplayer.unSelectAll();
+                mFretSelected = false;
+                mFirstSelection = true;
+                mDisplayer.update();
+                invalidate();
+                return true;
+            }
+
             for(int i = startFret; i <= endFret; i++)
                 mDisplayer.selectFret(i);
 
