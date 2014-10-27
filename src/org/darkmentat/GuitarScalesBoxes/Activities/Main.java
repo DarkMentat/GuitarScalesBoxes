@@ -14,7 +14,10 @@ import org.darkmentat.GuitarScalesBoxes.Model.Metronome;
 import org.darkmentat.GuitarScalesBoxes.R;
 import org.holoeverywhere.app.Activity;
 
-public class Main extends Activity implements OnFretIntervalSelectedListener, ActionMode.Callback
+import java.util.Observable;
+import java.util.Observer;
+
+public class Main extends Activity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
 {
     public static Main CurrentInstance;
     public static GuitarModel GuitarModel;
@@ -23,12 +26,14 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
 
     private GuitarView mGuitarView;
     private Metronome mMetronome;
+    private Menu mMenu;
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         CurrentInstance = this;
         GuitarModel = new GuitarModel(GuitarSetting.Settings[0], 24);
+        GuitarModel.addObserver(this);
         mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
         mGuitarView.setFretBoard(GuitarModel);
         mGuitarView.setOnFretIntervalSelectedListener(this);
@@ -45,7 +50,7 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-
+        mMenu = menu;
         return true;
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,5 +99,17 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
     }
     @Override public void onDestroyActionMode(ActionMode mode) {
         mMetronome.stop();
+    }
+
+    @Override public void update(Observable observable, Object data) {
+        if(GuitarModel.Scale != null)
+            mMenu.findItem(R.id.main_mCleanUpAll).setVisible(true);
+        else
+            mMenu.findItem(R.id.main_mCleanUpAll).setVisible(false);
+
+        if(GuitarModel.Box != null)
+            mMenu.findItem(R.id.main_mIterateBox).setVisible(true);
+        else
+            mMenu.findItem(R.id.main_mIterateBox).setVisible(false);
     }
 }

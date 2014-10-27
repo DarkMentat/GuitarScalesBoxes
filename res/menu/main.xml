@@ -4,20 +4,24 @@
     <item   android:id="@+id/main_mIterateBox"
             android:title="Iterate Box"
             android:icon="@android:drawable/ic_menu_agenda"
+            android:visible="false"
             android:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectScale"
             android:title="Select scale"
             android:icon="@android:drawable/ic_menu_edit"
+            android:visible="true"
             android:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectSetting"
             android:title="Select setting"
             android:icon="@android:drawable/ic_menu_compass"
+            android:visible="true"
             android:showAsAction="always" />
 
     <item   android:id="@+id/main_mCleanUpAll"
             android:title="Cleanup all"
             android:icon="@android:drawable/ic_menu_revert"
+            android:visible="false"
             android:showAsAction="always" />
 </menu>
