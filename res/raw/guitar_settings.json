@@ -1,0 +1,62 @@
+[
+    {   "Instrument" : "6-string guitar",
+        "Settings": [ { "Name" : "Default",
+                        "Notes": [  { "Value" : "E",  "Octave" : 4 },
+                                    { "Value" : "H",  "Octave" : 3 },
+                                    { "Value" : "G",  "Octave" : 3 },
+                                    { "Value" : "D",  "Octave" : 3 },
+                                    { "Value" : "A",  "Octave" : 2 },
+                                    { "Value" : "E",  "Octave" : 2 }]
+                    },{ "Name" : "Half step down",
+                        "Notes": [  { "Value" : "Dd",  "Octave" : 4 },
+                                    { "Value" : "Ad",  "Octave" : 3 },
+                                    { "Value" : "Fd",  "Octave" : 3 },
+                                    { "Value" : "Cd",  "Octave" : 3 },
+                                    { "Value" : "Gd",  "Octave" : 2 },
+                                    { "Value" : "Dd",  "Octave" : 2 }]
+                    },{ "Name" : "One step down",
+                        "Notes": [  { "Value" : "D",  "Octave" : 4 },
+                                    { "Value" : "A",  "Octave" : 3 },
+                                    { "Value" : "F",  "Octave" : 3 },
+                                    { "Value" : "C",  "Octave" : 3 },
+                                    { "Value" : "G",  "Octave" : 2 },
+                                    { "Value" : "D",  "Octave" : 2 }]
+                    },{ "Name" : "Drop D",
+                        "Notes": [  { "Value" : "E",  "Octave" : 4 },
+                                    { "Value" : "H",  "Octave" : 3 },
+                                    { "Value" : "G",  "Octave" : 3 },
+                                    { "Value" : "D",  "Octave" : 3 },
+                                    { "Value" : "A",  "Octave" : 2 },
+                                    { "Value" : "D",  "Octave" : 2 }]
+                    },{ "Name" : "Drop C",
+                        "Notes": [  { "Value" : "D",  "Octave" : 4 },
+                                    { "Value" : "A",  "Octave" : 3 },
+                                    { "Value" : "F",  "Octave" : 3 },
+                                    { "Value" : "C",  "Octave" : 3 },
+                                    { "Value" : "G",  "Octave" : 2 },
+                                    { "Value" : "C",  "Octave" : 2 }]
+                    } ] },
+    {   "Instrument" : "7-string guitar",
+        "Settings": [ { "Name" : "Default",
+                        "Notes": [  { "Value" : "E",  "Octave" : 4 },
+                                    { "Value" : "H",  "Octave" : 3 },
+                                    { "Value" : "G",  "Octave" : 3 },
+                                    { "Value" : "D",  "Octave" : 3 },
+                                    { "Value" : "A",  "Octave" : 2 },
+                                    { "Value" : "E",  "Octave" : 2 },
+                                    { "Value" : "H",  "Octave" : 1 }]
+                    } ] },
+    {   "Instrument" : "4-string bass",
+        "Settings":[{ "Name" : "Default",
+                        "Notes": [  { "Value" : "G",  "Octave" : 2 },
+                                    { "Value" : "D",  "Octave" : 2 },
+                                    { "Value" : "A",  "Octave" : 1 },
+                                    { "Value" : "E",  "Octave" : 1 }]
+                    },{ "Name" : "Default",
+                        "Notes": [  { "Value" : "H",  "Octave" : 2 },
+                                    { "Value" : "G",  "Octave" : 2 },
+                                    { "Value" : "D",  "Octave" : 2 },
+                                    { "Value" : "A",  "Octave" : 1 },
+                                    { "Value" : "E",  "Octave" : 1 }]
+        } ] }
+]

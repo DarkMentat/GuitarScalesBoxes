@@ -23,7 +23,7 @@ public class SelectSetting extends Activity
         settings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Main.GuitarModel.setSetting(GuitarSetting.Settings[position]);
+                Main.GuitarModel.setSetting(GuitarSetting.Settings.get(position));
                 finish();
 
                 Intent i = new Intent(SelectSetting.this, Main.class);

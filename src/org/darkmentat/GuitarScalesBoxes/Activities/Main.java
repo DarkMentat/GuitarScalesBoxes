@@ -32,7 +32,7 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         CurrentInstance = this;
-        GuitarModel = new GuitarModel(GuitarSetting.Settings[0], 24);
+        GuitarModel = new GuitarModel(GuitarSetting.Settings.get(0), 24);
         GuitarModel.addObserver(this);
         mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
         mGuitarView.setFretBoard(GuitarModel);
