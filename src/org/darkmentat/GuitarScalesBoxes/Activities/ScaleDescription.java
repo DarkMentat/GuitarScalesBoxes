@@ -15,7 +15,7 @@ public class ScaleDescription extends Activity
 
         int scaleIndex = getIntent().getIntExtra("ScaleIndex", 0);
 
-        ((TextView) findViewById(R.id.scaledescription_tvName)).setText(ScaleDefinition.Scales[scaleIndex].Name);
-        ((TextView) findViewById(R.id.scaledescription_tvDescription)).setText(ScaleDefinition.Scales[scaleIndex].Description);
+        ((TextView) findViewById(R.id.scaledescription_tvName)).setText(ScaleDefinition.Scales.get(scaleIndex).Name);
+        ((TextView) findViewById(R.id.scaledescription_tvDescription)).setText(ScaleDefinition.Scales.get(scaleIndex).Description);
     }
 }

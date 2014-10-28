@@ -27,7 +27,7 @@ public class SelectNote extends Activity
         notes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Main.GuitarModel.setScale(new Scale(NoteValue.values()[position], ScaleDefinition.Scales[scale].StepSequence));
+                Main.GuitarModel.setScale(new Scale(NoteValue.values()[position], ScaleDefinition.Scales.get(scale).StepSequence));
                 finish();
 
                 Intent i = new Intent(SelectNote.this, Main.class);

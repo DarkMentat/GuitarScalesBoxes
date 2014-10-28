@@ -1,0 +1,15 @@
+[   {
+        "Name" : "Chromatic scale",
+        "Description" : "The chromatic scale is a musical scale with twelve pitches, each a semitone above or below another.",
+        "StepSequence" : "11111111111"
+    },
+    {
+        "Name" : "Natural minor",
+        "Description" : "The natural minor scale has the same tones as the major scale, but uses the sixth tone of the major scale as its tonic.",
+        "StepSequence" : "212212"
+    },
+    {
+        "Name" : "Pentatonic",
+        "Description" : "A pentatonic scale is a musical scale or mode with five notes per octave",
+        "StepSequence" : "3223"
+    } ]
