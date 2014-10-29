@@ -9,19 +9,28 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.darkmentat.GuitarScalesBoxes.Model.NoteModel.NoteValue;
 
 public final class GuitarSetting
 {
+    public static class Instrument{
+        public final String Name;
+        public final List<GuitarSetting> Settings;
+
+        public Instrument(String name) {
+            Name = name;
+            Settings = new ArrayList<>();
+        }
+    }
+
     public static void parseJson(String json) throws JSONException {
         JSONArray jInstruments = new JSONArray(json);
         for (int iInstrument = 0; iInstrument < jInstruments.length(); iInstrument++)
         {
             JSONObject jInstrument = jInstruments.getJSONObject(iInstrument);
-            String instrumentName = jInstrument.getString("Instrument");
+            Instrument instrument = new Instrument(jInstrument.getString("Instrument"));
             JSONArray jSettings = jInstrument.getJSONArray("Settings");
             for (int iSetting = 0; iSetting < jSettings.length(); iSetting++)
             {
@@ -36,12 +45,16 @@ public final class GuitarSetting
                     int octave = jNote.getInt("Octave");
                     notes[i] = new NoteModel(NoteValue.valueOf(value), octave);
                 }
-                Settings.add(new GuitarSetting(notes, name));
+                GuitarSetting setting = new GuitarSetting(notes, name);
+                Settings.add(setting);
+                instrument.Settings.add(setting);
             }
+            Instruments.add(instrument);
         }
     }
 
-    public static List<GuitarSetting> Settings = new ArrayList<GuitarSetting>();
+    public static List<Instrument> Instruments = new ArrayList<>();
+    public static List<GuitarSetting> Settings = new ArrayList<>();
     static{
         StringBuilder json = new StringBuilder();
         BufferedReader stream = new BufferedReader(new InputStreamReader(Main.CurrentInstance.getResources().openRawResource(R.raw.guitar_settings)));
@@ -66,18 +79,18 @@ public final class GuitarSetting
 
     public final int StringCount;
     public final NoteModel[] StartNotes;
-    private final String mName;
+    public final String Name;
 
     public GuitarSetting(NoteModel[] notes) {
         this(notes, "");
     }
     public GuitarSetting(NoteModel[] notes, String name) {
-        mName = name;
+        Name = name;
         StringCount = notes.length;
         StartNotes = notes;
     }
 
     @Override public String toString() {
-        return mName;
+        return Name;
     }
 }
