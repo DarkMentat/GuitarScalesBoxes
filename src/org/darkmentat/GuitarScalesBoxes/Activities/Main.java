@@ -1,5 +1,6 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
 import org.darkmentat.GuitarScalesBoxes.Model.Metronome;
 import org.darkmentat.GuitarScalesBoxes.R;
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.app.AlertDialog;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -111,5 +113,20 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
             mMenu.findItem(R.id.main_mIterateBox).setVisible(true);
         else
             mMenu.findItem(R.id.main_mIterateBox).setVisible(false);
+    }
+
+    @Override public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Are you sure you want to close this activity?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
