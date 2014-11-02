@@ -36,7 +36,8 @@ class StandartDisplayer implements DisplayerFretBoard
     private final Paint mTextSelectedNote = new Paint(){{setColor(Color.argb(255,255,245,194)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
     private final Paint mTextOnBoardNote = new Paint(){{setColor(Color.argb(255,166,145,47)); setTextAlign(Align.CENTER); setTextSize(14); setAntiAlias(true);}};
     private final Paint mTextFretNum = new Paint(){{setColor(Color.argb(255,255,236,145)); setTextAlign(Align.CENTER); setTextSize(20); setAntiAlias(true);}};
-    private final Paint mSelection = new Paint(){{ setColor(Color.argb(80,20,20,255)); setStrokeWidth(0); }};
+
+    private final LightingColorFilter mSelectedFretColorFilter = new LightingColorFilter(Color.argb(255, 180, 180, 255),Color.argb(0,0,0,0));
 
     private Bitmap mCachedScreen;
     private boolean mCachedScreenNeedsUpdate = true;
@@ -156,6 +157,9 @@ class StandartDisplayer implements DisplayerFretBoard
         canvas.scale(mScaleCoef, mScaleCoef);
         canvas.translate(0, -mTopOffset);
 
+        if(mSelectedFrets.get(0))
+            SetPaintsSelected();
+
         canvas.drawBitmap(mPegTexture1, 0, 0, mPaint);
         canvas.drawBitmap(mPegTexture2, 0, mPegTexture1.getHeight(), mPaint);
         canvas.drawBitmap(mPegTexture3, 0, mPegTexture1.getHeight() + mPegTexture2.getHeight(), mPaint);
@@ -168,23 +172,43 @@ class StandartDisplayer implements DisplayerFretBoard
 
         for (int x = 0; x < mFretBoard.FretCount; x++)
         {
+            if(mSelectedFrets.get(x))
+                SetPaintsSelected();
+            else
+                UnsetPaintsSelected();
+
             drawFretNumber(canvas, x);
 
             for (int y = 0; y < mFretBoard.StringCount; y++)
             {
-                if(x != mFretBoard.FretCount-1)
-                    canvas.drawBitmap(mActualFretTexture, mPegTexture2.getWidth() + x * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight, mPaint);
+                if(x != 0)
+                    canvas.drawBitmap(mActualFretTexture, mPegTexture2.getWidth() + (x-1) * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight, mPaint);
                 drawNote(canvas, mFretBoard.Tab[x][y], mPegTexture2.getWidth() + (x-1) * mActualFretWidth, mPegTexture1.getHeight() + y * mActualFretHeight);
             }
-
-            if(mSelectedFrets.get(x))
-                drawSelection(canvas, x);
         }
         canvas.restore();
     }
-
-    private void drawSelection(Canvas canvas, int x) {
-        canvas.drawRect(mPegTexture2.getWidth() + (x-1)*mActualFretWidth, mPegTexture1.getHeight(), mPegTexture2.getWidth() + x*mActualFretWidth, mPegTexture1.getHeight() + mFretBoard.StringCount*mActualFretHeight, mSelection);
+    private void SetPaintsSelected() {
+        mPaint.setColorFilter(mSelectedFretColorFilter);
+        mCircleOnScaleNote.setColorFilter(mSelectedFretColorFilter);
+        mCircleOnTonicNote.setColorFilter(mSelectedFretColorFilter);
+        mCircleSelectedNote.setColorFilter(mSelectedFretColorFilter);
+        mCircleOnBoardNote.setColorFilter(mSelectedFretColorFilter);
+        mTextOnScaleNote.setColorFilter(mSelectedFretColorFilter);
+        mTextOnTonicNote.setColorFilter(mSelectedFretColorFilter);
+        mTextSelectedNote.setColorFilter(mSelectedFretColorFilter);
+        mTextOnBoardNote.setColorFilter(mSelectedFretColorFilter);
+    }
+    private void UnsetPaintsSelected(){
+        mPaint.setColorFilter(null);
+        mCircleOnScaleNote.setColorFilter(null);
+        mCircleOnTonicNote.setColorFilter(null);
+        mCircleSelectedNote.setColorFilter(null);
+        mCircleOnBoardNote.setColorFilter(null);
+        mTextOnScaleNote.setColorFilter(null);
+        mTextOnTonicNote.setColorFilter(null);
+        mTextSelectedNote.setColorFilter(null);
+        mTextOnBoardNote.setColorFilter(null);
     }
 
     private void drawFretNumber(Canvas canvas, int x) {
