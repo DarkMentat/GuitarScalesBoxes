@@ -1,62 +1,47 @@
-package org.darkmentat.GuitarScalesBoxes.Activities;
+package org.darkmentat.GuitarScalesBoxes.Fragments;
 
-import org.holoeverywhere.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.content.Context;
+import org.darkmentat.GuitarScalesBoxes.Activities.Main;
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
 import org.darkmentat.GuitarScalesBoxes.R;
-
 import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.BaseExpandableListAdapter;
 import org.holoeverywhere.widget.ExpandableListView;
 
 import java.util.List;
 
-public class SelectSetting extends Activity
+public class SettingsOverview extends Fragment
 {
-    @Override public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.selectsetting);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_settingsoverview, container, false);
 
-        ExpandableListView settings = (ExpandableListView) findViewById(R.id.selectsetting_elvSettings);
-        settings.setAdapter(new GuitarSettingExpandableListAdapter(this, GuitarSetting.Instruments));
+        ExpandableListView settings = (ExpandableListView) view.findViewById(R.id.selectsetting_elvSettings);
+        settings.setAdapter(new GuitarSettingExpandableListAdapter(getActivity(), GuitarSetting.Instruments));
         settings.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Main.GuitarModel.setSetting(GuitarSetting.Instruments.get(groupPosition).Settings.get(childPosition));
-                finish();
+                getActivity().finish();
 
-                Intent i = new Intent(SelectSetting.this, Main.class);
+                Intent i = new Intent(getActivity(), Main.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 return true;
             }
         });
-    }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.selectsetting, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.selectsetting_mCustomSetting:
-                startActivity(new Intent(this, CreateCustomSetting.class));
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+        return view;
     }
 
     private static class GuitarSettingExpandableListAdapter extends BaseExpandableListAdapter{
-        private List<GuitarSetting.Instrument>  mInstruments;
+        private List<GuitarSetting.Instrument> mInstruments;
         private LayoutInflater mInflater;
 
         public GuitarSettingExpandableListAdapter(Context context, List<GuitarSetting.Instrument> instruments) {

@@ -1,64 +1,62 @@
-package org.darkmentat.GuitarScalesBoxes.Activities;
+package org.darkmentat.GuitarScalesBoxes.Fragments;
 
-import org.holoeverywhere.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import org.darkmentat.GuitarScalesBoxes.Activities.Main;
+import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
+import org.darkmentat.GuitarScalesBoxes.Model.NoteModel;
+import org.darkmentat.GuitarScalesBoxes.R;
+import org.holoeverywhere.LayoutInflater;
+import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.AdapterView;
 import org.holoeverywhere.widget.ArrayAdapter;
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.Spinner;
-import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
-import org.darkmentat.GuitarScalesBoxes.Model.NoteModel;
-import org.darkmentat.GuitarScalesBoxes.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.darkmentat.GuitarScalesBoxes.Model.NoteModel.NoteValue;
-
-public class CreateCustomSetting extends Activity
+public class CustomSetting extends Fragment
 {
     private static class Tuple{
-        public NoteValue Value;
+        public NoteModel.NoteValue Value;
         public Integer Octave;
 
-        private Tuple(NoteValue value, Integer octave) {
+        private Tuple(NoteModel.NoteValue value, Integer octave) {
             Value = value;
             Octave = octave;
         }
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.createcustomsetting);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_customsetting, container, false);
 
         final List<Tuple> notes = new ArrayList<>();
         notes.add(new Tuple(null, null));
         notes.add(new Tuple(null, null));
         notes.add(new Tuple(null, null));
 
-        final ArrayAdapter adapter = new ArrayAdapter<Tuple>(this, R.layout.createcustomsetting_item, notes){
-            private LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final ArrayAdapter adapter = new ArrayAdapter<Tuple>(getActivity(), R.layout.item_createcustomsetting, notes){
+            private android.view.LayoutInflater mInflater = (android.view.LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             @Override
             public View getView(final int notePosition, View convertView, ViewGroup parent) {
                 View view = convertView;
                 //todo fix that
                 //if (view == null)
-                    view = mInflater.inflate(R.layout.createcustomsetting_item, parent, false);
+                view = mInflater.inflate(R.layout.item_createcustomsetting, parent, false);
 
-                final ArrayAdapter<NoteValue> adapterNote = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, NoteValue.values());
+                final ArrayAdapter<NoteModel.NoteValue> adapterNote = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, NoteModel.NoteValue.values());
                 adapterNote.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                 final ArrayAdapter<Integer> adapterOctave = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, new Integer[]{0,1,2,3,4,5});
                 adapterOctave.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-                NoteValue n = getItem(notePosition).Value;
+                NoteModel.NoteValue n = getItem(notePosition).Value;
                 Integer o = getItem(notePosition).Octave;
 
                 ((Spinner) view.findViewById(R.id.createcustomsetting_item_note)).setAdapter(adapterNote);
@@ -89,16 +87,16 @@ public class CreateCustomSetting extends Activity
                 return view;
             }
         };
-        ((ListView) findViewById(R.id.createcustomsetting_lvStrings)).setAdapter(adapter);
+        ((ListView) view.findViewById(R.id.createcustomsetting_lvStrings)).setAdapter(adapter);
 
-        findViewById(R.id.createcustomsetting_btnAdd).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.createcustomsetting_btnAdd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 notes.add(new Tuple(null,null));
                 adapter.notifyDataSetChanged();
             }
         });
-        findViewById(R.id.createcustomsetting_btnSave).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.createcustomsetting_btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean allIsOk = notes.size() > 2;
@@ -115,13 +113,14 @@ public class CreateCustomSetting extends Activity
                     setting[i] = new NoteModel(notes.get(i).Value, notes.get(i).Octave);
 
                 Main.GuitarModel.setSetting(new GuitarSetting(setting));
-                finish();
+                getActivity().finish();
 
-                Intent i = new Intent(CreateCustomSetting.this, Main.class);
+                Intent i = new Intent(getActivity(), Main.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         });
-    }
 
+        return view;
+    }
 }

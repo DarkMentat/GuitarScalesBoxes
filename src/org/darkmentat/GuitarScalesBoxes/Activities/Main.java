@@ -32,7 +32,7 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
 
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
         CurrentInstance = this;
         GuitarModel = new GuitarModel(GuitarSetting.Settings.get(0), 24);
         GuitarModel.addObserver(this);
@@ -59,10 +59,10 @@ public class Main extends Activity implements OnFretIntervalSelectedListener, Ac
         switch (item.getItemId())
         {
             case R.id.main_mSelectScale:
-                startActivity(new Intent(this, ScalesOverview.class));
+                startActivity(new Intent(this, Scales.class));
                 break;
             case R.id.main_mSelectSetting:
-                startActivity(new Intent(this, SelectSetting.class));
+                startActivity(new Intent(this, Settings.class));
                 break;
             case R.id.main_mCleanUpAll:
                 GuitarModel.setBox(null);
