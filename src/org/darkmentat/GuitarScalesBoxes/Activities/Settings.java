@@ -26,7 +26,7 @@ public class Settings extends Activity
         switch (item.getItemId())
         {
             case R.id.selectsetting_mCustomSetting:
-                getSupportFragmentManager().beginTransaction().replace(R.id.leftFragment, new CustomSetting()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.leftFragment, new CustomSetting()).addToBackStack(null).commit();
                 break;
         }
         return super.onOptionsItemSelected(item);
