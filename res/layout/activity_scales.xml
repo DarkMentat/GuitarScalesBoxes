@@ -7,9 +7,9 @@
     <FrameLayout    android:id="@+id/leftFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"/>
+                    android:layout_weight="1"/>
     <FrameLayout    android:id="@+id/rightFragment"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="16"/>
+                    android:layout_weight="1"/>
 </LinearLayout>

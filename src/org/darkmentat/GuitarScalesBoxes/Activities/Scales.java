@@ -34,11 +34,12 @@ public class Scales extends Activity implements ScalesOverview.ScalesOverviewLis
         int sideFragment = isScreenLarge()? R.id.rightFragment : R.id.leftFragment;
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(sideFragment, frag);
-        if(isScreenLarge() && getSupportFragmentManager().findFragmentById(R.id.rightFragment) == null)
+        if(getSupportFragmentManager().findFragmentById(R.id.rightFragment) == null)
             transaction.addToBackStack(null);
         transaction.commit();
 
-        findViewById(R.id.rightFragment).setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT, 1));
+        if(isScreenLarge())
+            findViewById(R.id.rightFragment).setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT, 1));
     }
     @Override public void onScaleAskedForDescription(int scaleIndex) {
         Bundle bundle = new Bundle();
@@ -49,11 +50,12 @@ public class Scales extends Activity implements ScalesOverview.ScalesOverviewLis
         int sideFragment = isScreenLarge()? R.id.rightFragment : R.id.leftFragment;
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(sideFragment, frag);
-        if(isScreenLarge() && getSupportFragmentManager().findFragmentById(R.id.rightFragment) == null)
+        if(getSupportFragmentManager().findFragmentById(R.id.rightFragment) == null)
             transaction.addToBackStack(null);
         transaction.commit();
 
-        findViewById(R.id.rightFragment).setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT, 1));
+        if(isScreenLarge())
+            findViewById(R.id.rightFragment).setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT, 1));
     }
 
     @Override public void onBackPressed() {
