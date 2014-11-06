@@ -123,7 +123,6 @@ class StandartDisplayer implements DisplayerFretBoard
     }
     @Override public void unSelectAll() {
         mSelectedFrets.clear();
-        updateCachedScreen();
     }
 
     @Override public int getFretAtPoint(float point) {
