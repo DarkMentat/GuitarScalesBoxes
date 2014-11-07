@@ -3,17 +3,17 @@ package org.darkmentat.GuitarScalesBoxes.Activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.OnFretIntervalSelectedListener;
-import org.darkmentat.GuitarScalesBoxes.Model.GuitarModel;
-import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
-import org.darkmentat.GuitarScalesBoxes.Model.Metronome;
+import org.darkmentat.GuitarScalesBoxes.Model.*;
 import org.darkmentat.GuitarScalesBoxes.R;
 
 import java.util.Observable;
@@ -34,11 +34,16 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CurrentInstance = this;
-        GuitarModel = new GuitarModel(GuitarSetting.Settings.get(0), 24);
+
+        loadPreferences();
+        if(GuitarModel == null)
+            GuitarModel = new GuitarModel(GuitarSetting.Settings.get(0), 24);
         GuitarModel.addObserver(this);
+
         mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
         mGuitarView.setFretBoard(GuitarModel);
         mGuitarView.setOnFretIntervalSelectedListener(this);
+
         mMetronome = new Metronome();
     }
     @Override public void OnIntervalSelected(int startFret, int endFret) {
@@ -53,6 +58,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         mMenu = menu;
+        update(GuitarModel, null);
         return true;
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -128,5 +134,84 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+    @Override protected void onPause() {
+        super.onPause();
+        savePreferences();
+    }
+
+    private void savePreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt("FretCount", GuitarModel.FretCount);
+        editor.putString("SettingName", GuitarModel.Setting.Name);
+        editor.putString("SettingNotes", notesArrayToString(GuitarModel.Setting.StartNotes));
+
+        editor.putString("ScaleStepSequence", GuitarModel.Scale != null ? GuitarModel.Scale.StepSequence : "");
+        editor.putString("ScaleTonicValue", GuitarModel.Scale != null ? GuitarModel.Scale.Tonic.Value.name() : "");
+
+        editor.putInt("BoxStartFret", GuitarModel.Box != null ? GuitarModel.Box.StartFret : -1);
+        editor.putInt("BoxEndFret", GuitarModel.Box != null ? GuitarModel.Box.EndFret : -1);
+
+        editor.commit();
+    }
+    private void loadPreferences(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        int fretCount = preferences.getInt("FretCount", -1);
+
+        String settingName = preferences.getString("SettingName", "");
+        NoteModel[] settingNotes = notesArrayFromString(preferences.getString("SettingNotes", ""));
+
+        if(fretCount == -1 || settingNotes.length <= 0) return;
+
+        GuitarModel = new GuitarModel(new GuitarSetting(settingNotes, settingName), fretCount);
+
+        String stepSequence = preferences.getString("ScaleStepSequence", "");
+        String tonicValue = preferences.getString("ScaleTonicValue", "");
+
+        if(stepSequence.equals("") || tonicValue.equals("")) return;
+
+        GuitarModel.setScale(new Scale(NoteModel.NoteValue.valueOf(tonicValue), stepSequence));
+
+        int boxStartFret = preferences.getInt("BoxStartFret", -1);
+        int boxEndFret = preferences.getInt("BoxEndFret", -1);
+
+        if(boxStartFret < 0 || boxEndFret < 0) return;
+
+        GuitarModel.setBox(boxStartFret, boxEndFret);
+    }
+
+    private String notesArrayToString(NoteModel[] notes){
+        StringBuilder res = new StringBuilder();
+        for (NoteModel note : notes)
+        {
+            res.append(note.Value.name());
+            res.append(' ');
+            res.append(note.Octave.ordinal());
+            res.append(" | ");
+        }
+        res.delete(res.length()-3, res.length());
+
+        return res.toString();
+    }
+    private NoteModel[] notesArrayFromString(String string){
+        if(string.equals(""))
+            return new NoteModel[0];
+
+        String[] split = string.split(" \\| ");
+
+        NoteModel[] res = new NoteModel[split.length];
+
+        for (int i = 0; i < res.length; i++)
+        {
+            String[] note = split[i].split(" ");
+            NoteModel.NoteValue value = NoteModel.NoteValue.valueOf(note[0]);
+            Integer octave = Integer.decode(note[1]);
+            res[i] = new NoteModel(value,octave);
+        }
+
+        return res;
     }
 }
