@@ -4,17 +4,17 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import org.darkmentat.GuitarScalesBoxes.Fragments.ScaleDescription;
 import org.darkmentat.GuitarScalesBoxes.Fragments.ScalesOverview;
 import org.darkmentat.GuitarScalesBoxes.Fragments.SelectNote;
 import org.darkmentat.GuitarScalesBoxes.R;
-import org.holoeverywhere.app.Activity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.LayoutParams;
 
-public class Scales extends Activity implements ScalesOverview.ScalesOverviewListener
+public class Scales extends ActionBarActivity implements ScalesOverview.ScalesOverviewListener
 {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

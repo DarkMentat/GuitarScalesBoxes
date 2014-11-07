@@ -3,16 +3,16 @@ package org.darkmentat.GuitarScalesBoxes.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import org.darkmentat.GuitarScalesBoxes.Activities.Main;
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
 import org.darkmentat.GuitarScalesBoxes.R;
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.BaseExpandableListAdapter;
-import org.holoeverywhere.widget.ExpandableListView;
 
 import java.util.List;
 
@@ -40,7 +40,8 @@ public class SettingsOverview extends Fragment
         return view;
     }
 
-    private static class GuitarSettingExpandableListAdapter extends BaseExpandableListAdapter{
+    private static class GuitarSettingExpandableListAdapter extends BaseExpandableListAdapter
+    {
         private List<GuitarSetting.Instrument> mInstruments;
         private LayoutInflater mInflater;
 

@@ -3,17 +3,17 @@ package org.darkmentat.GuitarScalesBoxes.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import org.darkmentat.GuitarScalesBoxes.Activities.Main;
 import org.darkmentat.GuitarScalesBoxes.Model.NoteModel;
 import org.darkmentat.GuitarScalesBoxes.Model.Scale;
 import org.darkmentat.GuitarScalesBoxes.Model.ScaleDefinition;
 import org.darkmentat.GuitarScalesBoxes.R;
-import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
-import org.holoeverywhere.widget.ArrayAdapter;
-import org.holoeverywhere.widget.ListView;
 
 import static android.widget.AdapterView.OnItemClickListener;
 
@@ -26,7 +26,7 @@ public class SelectNote extends Fragment
         final int scale = getArguments().getInt("ScaleIndex", 0);
 
         ListView notes = (ListView) view.findViewById(R.id.selectnote_lvNotes);
-        notes.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_2, NoteModel.NoteValue.values()));
+        notes.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, NoteModel.NoteValue.values()));
         notes.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {

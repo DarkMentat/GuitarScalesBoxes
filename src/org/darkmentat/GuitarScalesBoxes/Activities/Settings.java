@@ -1,14 +1,14 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.darkmentat.GuitarScalesBoxes.Fragments.CustomSetting;
 import org.darkmentat.GuitarScalesBoxes.Fragments.SettingsOverview;
 import org.darkmentat.GuitarScalesBoxes.R;
-import org.holoeverywhere.app.Activity;
 
-public class Settings extends Activity
+public class Settings extends ActionBarActivity
 {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,7 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module" module-name="HoloEverywhere Library" />
+    <orderEntry type="module" module-name="appcompat" exported="" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

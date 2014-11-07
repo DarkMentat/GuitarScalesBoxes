@@ -1,9 +1,11 @@
 package org.darkmentat.GuitarScalesBoxes.Activities;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +15,11 @@ import org.darkmentat.GuitarScalesBoxes.Model.GuitarModel;
 import org.darkmentat.GuitarScalesBoxes.Model.GuitarSetting;
 import org.darkmentat.GuitarScalesBoxes.Model.Metronome;
 import org.darkmentat.GuitarScalesBoxes.R;
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.app.AlertDialog;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class Main extends Activity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
+public class Main extends ActionBarActivity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
 {
     public static Main CurrentInstance;
     public static GuitarModel GuitarModel;

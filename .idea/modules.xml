@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GuitarScalesBoxes.iml" filepath="$PROJECT_DIR$/GuitarScalesBoxes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/holoeverywhere/HoloEverywhere Library.iml" filepath="$PROJECT_DIR$/holoeverywhere/HoloEverywhere Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appcompat/appcompat.iml" filepath="$PROJECT_DIR$/appcompat/appcompat.iml" />
     </modules>
   </component>
 </project>

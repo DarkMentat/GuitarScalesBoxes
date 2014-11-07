@@ -38,7 +38,6 @@ public class GuitarView extends View implements OnGestureListener, Observer
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.GuitarView);
         setMinFretCountOnScreen(a.getInt(R.styleable.GuitarView_minFretsOnScreen, 0));
-        initializeScrollbars(a);
         a.recycle();
     }
 

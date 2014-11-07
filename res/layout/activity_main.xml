@@ -8,6 +8,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/main_gvGuitar"
+            android:scrollbars="horizontal"
             app:minFretsOnScreen="5"/>
 </LinearLayout>
 

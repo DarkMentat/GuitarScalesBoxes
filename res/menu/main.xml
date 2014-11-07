@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:sabd="http://schemas.android.com/apk/res-auto">
     <item   android:id="@+id/main_mIterateBox"
             android:title="Iterate Box"
             android:icon="@android:drawable/ic_menu_agenda"
             android:visible="false"
-            android:showAsAction="always"/>
+            sabd:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectScale"
             android:title="Select scale"
             android:icon="@android:drawable/ic_menu_edit"
             android:visible="true"
-            android:showAsAction="always"/>
+            sabd:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectSetting"
             android:title="Select setting"
             android:icon="@android:drawable/ic_menu_compass"
             android:visible="true"
-            android:showAsAction="always" />
+            sabd:showAsAction="always" />
 
     <item   android:id="@+id/main_mCleanUpAll"
             android:title="Cleanup all"
             android:icon="@android:drawable/ic_menu_revert"
             android:visible="false"
-            android:showAsAction="always" />
+            sabd:showAsAction="always" />
 </menu>
