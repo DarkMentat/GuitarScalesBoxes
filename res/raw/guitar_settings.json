@@ -47,16 +47,24 @@
                                     { "Value" : "H",  "Octave" : 1 }]
                     } ] },
     {   "Instrument" : "4-string bass",
-        "Settings":[{ "Name" : "Default",
+        "Settings":[{   "Name" : "Default",
                         "Notes": [  { "Value" : "G",  "Octave" : 2 },
                                     { "Value" : "D",  "Octave" : 2 },
                                     { "Value" : "A",  "Octave" : 1 },
                                     { "Value" : "E",  "Octave" : 1 }]
-                    },{ "Name" : "Default",
+                    } ] },
+    {   "Instrument" : "5-string bass",
+        "Settings":[{   "Name" : "Default with H2",
                         "Notes": [  { "Value" : "H",  "Octave" : 2 },
                                     { "Value" : "G",  "Octave" : 2 },
                                     { "Value" : "D",  "Octave" : 2 },
                                     { "Value" : "A",  "Octave" : 1 },
                                     { "Value" : "E",  "Octave" : 1 }]
+                    },{ "Name" : "Default with H0",
+                        "Notes": [  { "Value" : "G",  "Octave" : 2 },
+                                    { "Value" : "D",  "Octave" : 2 },
+                                    { "Value" : "A",  "Octave" : 1 },
+                                    { "Value" : "E",  "Octave" : 1 },
+                                    { "Value" : "H",  "Octave" : 0 }]
         } ] }
 ]
