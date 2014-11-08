@@ -135,12 +135,14 @@ class StandartDisplayer implements DisplayerFretBoard
     }
 
     @Override public float getWidth() {
+        if(mFretBoard == null) return 0;
         return mScaleCoef *(mPegTexture2.getWidth() + (mFretBoard.FretCount-1) * mActualFretWidth);
     }
     @Override public float getHeight() {
         return getMinimalHeight() + mScaleCoef *(mPegTexture1.getHeight() + mPegTexture6.getHeight());
     }
     public float getMinimalHeight() {
+        if(mFretBoard == null) return 0;
         return mScaleCoef *(mFretBoard.StringCount * mActualFretHeight);
     }
 

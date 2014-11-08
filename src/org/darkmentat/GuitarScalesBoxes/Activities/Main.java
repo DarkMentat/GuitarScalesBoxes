@@ -110,12 +110,16 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     }
 
     @Override public void update(Observable observable, Object data) {
-        if(GuitarModel.Scale != null)
+        if(observable == null)
+            return;
+        GuitarModel model = (GuitarModel) observable;
+
+        if(model.Scale != null)
             mMenu.findItem(R.id.main_mCleanUpAll).setVisible(true);
         else
             mMenu.findItem(R.id.main_mCleanUpAll).setVisible(false);
 
-        if(GuitarModel.Box != null)
+        if(model.Box != null)
             mMenu.findItem(R.id.main_mIterateBox).setVisible(true);
         else
             mMenu.findItem(R.id.main_mIterateBox).setVisible(false);
