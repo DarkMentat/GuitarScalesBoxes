@@ -20,6 +20,19 @@ public class PreRecordedSoundPlayer implements SoundPlayer
         mSoundPoolMap.put("m1" , mSoundPool.load(Main.CurrentInstance, R.raw.m1,  1) );
         mSoundPoolMap.put("m2" , mSoundPool.load(Main.CurrentInstance, R.raw.m2,  1) );
 
+        mSoundPoolMap.put("A0" , mSoundPool.load(Main.CurrentInstance, R.raw.a0,  1) );
+        mSoundPoolMap.put("A#0", mSoundPool.load(Main.CurrentInstance, R.raw.ad0, 1) );
+        mSoundPoolMap.put("H0" , mSoundPool.load(Main.CurrentInstance, R.raw.h0,  1) );
+
+        mSoundPoolMap.put("C1" , mSoundPool.load(Main.CurrentInstance, R.raw.c1,  1) );
+        mSoundPoolMap.put("C#1", mSoundPool.load(Main.CurrentInstance, R.raw.cd1, 1) );
+        mSoundPoolMap.put("D1" , mSoundPool.load(Main.CurrentInstance, R.raw.d1,  1) );
+        mSoundPoolMap.put("D#1", mSoundPool.load(Main.CurrentInstance, R.raw.dd1, 1) );
+        mSoundPoolMap.put("E1" , mSoundPool.load(Main.CurrentInstance, R.raw.e1,  1) );
+        mSoundPoolMap.put("F1" , mSoundPool.load(Main.CurrentInstance, R.raw.f1,  1) );
+        mSoundPoolMap.put("F#1", mSoundPool.load(Main.CurrentInstance, R.raw.fd1, 1) );
+        mSoundPoolMap.put("G1" , mSoundPool.load(Main.CurrentInstance, R.raw.g1,  1) );
+        mSoundPoolMap.put("G#1", mSoundPool.load(Main.CurrentInstance, R.raw.gd1, 1) );
         mSoundPoolMap.put("A1" , mSoundPool.load(Main.CurrentInstance, R.raw.a1,  1) );
         mSoundPoolMap.put("A#1", mSoundPool.load(Main.CurrentInstance, R.raw.ad1, 1) );
         mSoundPoolMap.put("H1" , mSoundPool.load(Main.CurrentInstance, R.raw.h1,  1) );
