@@ -30,6 +30,8 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     private Metronome mMetronome;
     private Menu mMenu;
 
+    private boolean mActionMode = false;
+
     @Override public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -106,6 +108,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         return true;
     }
     @Override public void onDestroyActionMode(ActionMode mode) {
+        mActionMode = false;
         mMetronome.stop();
     }
 
@@ -126,18 +129,22 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     }
 
     @Override public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Closing Activity")
-                .setMessage("Are you sure you want to close this activity?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+        if(mActionMode)
+            super.onBackPressed();
+        else
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Closing Activity")
+                    .setMessage("Are you sure you want to close this activity?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
     }
     @Override protected void onPause() {
         super.onPause();
