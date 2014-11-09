@@ -89,6 +89,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
 
     @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         mode.getMenuInflater().inflate(R.menu.metronome, menu);
+        mActionMode = true;
         return true;
     }
     @Override public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
