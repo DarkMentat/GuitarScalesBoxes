@@ -60,7 +60,7 @@ public final class GuitarSetting
         BufferedReader stream = new BufferedReader(new InputStreamReader(Main.CurrentInstance.getResources().openRawResource(R.raw.guitar_settings)));
         try
         {
-            String line = "";
+            String line;
             while ((line = stream.readLine()) != null)
                 json.append(line);
 

@@ -3,25 +3,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:sabd="http://schemas.android.com/apk/res-auto">
     <item   android:id="@+id/main_mIterateBox"
-            android:title="Iterate Box"
+            android:title="@string/iterate_box"
             android:icon="@drawable/ic_menu_playguitar"
             android:visible="false"
             sabd:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectScale"
-            android:title="Select scale"
+            android:title="@string/select_scale"
             android:icon="@drawable/ic_menu_scales"
             android:visible="true"
             sabd:showAsAction="always"/>
 
     <item   android:id="@+id/main_mSelectSetting"
-            android:title="Select setting"
+            android:title="@string/set_setting"
             android:icon="@drawable/ic_menu_settings"
             android:visible="true"
             sabd:showAsAction="always" />
 
     <item   android:id="@+id/main_mCleanUpAll"
-            android:title="Cleanup all"
+            android:title="@string/clean_up"
             android:icon="@drawable/ic_menu_back"
             android:visible="false"
             sabd:showAsAction="always" />

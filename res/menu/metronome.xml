@@ -2,11 +2,11 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item   android:id="@+id/main_mMetronomeStop"
-            android:title="Play"
+            android:title="@string/stop"
             android:icon="@android:drawable/ic_media_pause"
             android:showAsAction="always" />
     <item   android:id="@+id/main_mMetronomePlay"
-            android:title="Play"
+            android:title="@string/play"
             android:icon="@android:drawable/ic_media_play"
             android:showAsAction="always" />
 </menu>

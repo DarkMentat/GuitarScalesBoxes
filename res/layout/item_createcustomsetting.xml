@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <Spinner android:layout_width="wrap_content"
@@ -16,5 +16,6 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:id="@+id/createcustomsetting_item_delete"
-            android:text=" - "/>
+            android:text=" - "
+            tools:ignore="HardcodedText"/>
 </LinearLayout>

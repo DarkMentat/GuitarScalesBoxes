@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GuitarScalesBoxes</string>
+
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="iterate_box">Iterate Box</string>
+    <string name="select_scale">Select scale</string>
+    <string name="set_setting">Select setting</string>
+    <string name="clean_up">Cleanup all</string>
+    <string name="add">Add new</string>
+    <string name="save">Save</string>
+    <string name="info">Info</string>
+    <string name="closing_activity">Closing Activity</string>
+    <string name="ask_for_close_activity">Are you sure you want to close this activity?</string>
+
+
 </resources>

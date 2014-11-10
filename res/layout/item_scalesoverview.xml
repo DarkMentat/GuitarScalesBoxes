@@ -19,5 +19,5 @@
             android:id="@+id/listviewitem_btnInfo"
             android:layout_weight="5"
             android:focusable="false"
-            android:text="Info"/>
+            android:text="@string/info"/>
 </LinearLayout>

@@ -34,7 +34,7 @@ public class ScaleDefinition
         BufferedReader stream = new BufferedReader(new InputStreamReader(Main.CurrentInstance.getResources().openRawResource(R.raw.scales)));
         try
         {
-            String line = "";
+            String line;
             while ((line = stream.readLine()) != null)
                 json.append(line);
 

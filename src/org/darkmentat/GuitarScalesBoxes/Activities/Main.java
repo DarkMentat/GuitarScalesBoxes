@@ -135,16 +135,16 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         else
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle("Closing Activity")
-                    .setMessage("Are you sure you want to close this activity?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    .setTitle(getString(R.string.closing_activity))
+                    .setMessage(getString(R.string.ask_for_close_activity))
+                    .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener()
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setNegativeButton("No", null)
+                    .setNegativeButton(getString(android.R.string.no), null)
                     .show();
     }
     @Override protected void onPause() {
