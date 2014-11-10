@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Гітарні бокси гам</string>
+
+    <string name="play">Грати</string>
+    <string name="stop">Зупинити</string>
+    <string name="iterate_box">Програти бокс</string>
+    <string name="select_scale">Вибрати гамму</string>
+    <string name="set_setting">Вибрати стрій</string>
+    <string name="clean_up">Очистити все</string>
+    <string name="add">Додати</string>
+    <string name="save">Зберегти</string>
+    <string name="info">Детальніше</string>
+    <string name="closing_activity">Закрити вікно?</string>
+    <string name="ask_for_close_activity">Ви впевнені, що хочете закрити це вікно?</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+
+</resources>

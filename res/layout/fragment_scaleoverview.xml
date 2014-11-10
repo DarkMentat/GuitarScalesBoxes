@@ -9,7 +9,7 @@
               android:layout_height="wrap_content"
               android:textSize="32sp"
               android:layout_margin="6dp"
-              android:text="Select scale"/>
+              android:text="@string/select_scale"/>
     <ListView
             android:id="@+id/scalesoverview_lvScales"
             android:layout_width="match_parent"
