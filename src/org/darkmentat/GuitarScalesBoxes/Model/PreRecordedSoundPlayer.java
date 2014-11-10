@@ -14,7 +14,7 @@ public class PreRecordedSoundPlayer implements SoundPlayer
 
     @Override public void init() {
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
-        mSoundPoolMap = new HashMap<>(65);
+        mSoundPoolMap = new HashMap<>(77);
 
         //region Forming SoundPoolMap
         mSoundPoolMap.put("m1" , mSoundPool.load(Main.CurrentInstance, R.raw.m1,  1) );

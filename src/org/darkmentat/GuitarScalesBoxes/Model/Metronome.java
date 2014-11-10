@@ -30,7 +30,12 @@ public class Metronome implements Runnable
         mExecutor = Executors.newSingleThreadScheduledExecutor();
 
         mSoundPlayer = new PreRecordedSoundPlayer();
-        mSoundPlayer.init();
+        new Thread(new Runnable() {
+            @Override public void run() {
+                mSoundPlayer.init();
+            }
+        }).start();
+
     }
 
     public void play(int rate) {
