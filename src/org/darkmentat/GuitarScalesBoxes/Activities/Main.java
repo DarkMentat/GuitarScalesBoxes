@@ -52,8 +52,8 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         if (GuitarModel.Scale != null)
         {
             GuitarModel.setBox(startFret, endFret);
-            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
-            mGuitarView.setOffsetFret(GuitarModel.Box.StartFret);
+            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret);
+            mGuitarView.setOffsetFret(GuitarModel.Box.StartFret, GuitarModel.Box.EndFret);
         }
     }
 
