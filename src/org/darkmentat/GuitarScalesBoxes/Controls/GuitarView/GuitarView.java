@@ -19,10 +19,11 @@ import static android.view.GestureDetector.OnGestureListener;
 
 public class GuitarView extends View implements OnGestureListener, Observer
 {
+    public int ScrollOffset = 0;
+
     private DisplayerFretBoard mDisplayer = new StandartDisplayer(getContext());
 
     private int mMinFretCountOnScreen;
-    private int mOffset = 0;
     private final OverScroller mScroller = new OverScroller(getContext());
     private final GestureDetector mGestureDetector = new GestureDetector(getContext(), this);
     private boolean mFirstSelection = true;
@@ -58,14 +59,14 @@ public class GuitarView extends View implements OnGestureListener, Observer
     }
     public void setOffsetFret(int fret){
         if(fret < 0)
-            mOffset = 0;
+            ScrollOffset = 0;
         else
-            mOffset = (int) mDisplayer.getPointOfFret(fret);
+            ScrollOffset = (int) mDisplayer.getPointOfFret(fret);
     }
     public void setOffsetFret(int startFret, int endFret){
-        mOffset = (int) ((mDisplayer.getPointOfFret(startFret) + mDisplayer.getPointOfFret(endFret+1) - getMeasuredWidth()) * 0.5f);
-        if(mOffset < 0)
-            mOffset = 0;
+        ScrollOffset = (int) ((mDisplayer.getPointOfFret(startFret) + mDisplayer.getPointOfFret(endFret+1) - getMeasuredWidth()) * 0.5f);
+        if(ScrollOffset < 0)
+            ScrollOffset = 0;
     }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -78,7 +79,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return (int) mDisplayer.getWidth();
     }
     @Override protected int computeHorizontalScrollOffset() {
-        return mOffset;
+        return ScrollOffset;
     }
     @Override protected int computeHorizontalScrollExtent() {
         return getMeasuredWidth();
@@ -106,7 +107,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
             else
             {
                 mDisplayer.unSelectAll();
-                mSelectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
+                mSelectedFret = mDisplayer.getFretAtPoint(e.getX() + ScrollOffset);
                 mDisplayer.selectFret(mSelectedFret);
                 mFretSelected = true;
                 mFirstSelection = false;
@@ -114,7 +115,7 @@ public class GuitarView extends View implements OnGestureListener, Observer
         }
         else
         {
-            int selectedFret = mDisplayer.getFretAtPoint(e.getX() + mOffset);
+            int selectedFret = mDisplayer.getFretAtPoint(e.getX() + ScrollOffset);
             int startFret = mSelectedFret < selectedFret ? mSelectedFret : selectedFret;
             int endFret =   mSelectedFret > selectedFret ? mSelectedFret : selectedFret;
 
@@ -145,28 +146,28 @@ public class GuitarView extends View implements OnGestureListener, Observer
         ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
     }
     @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        mOffset += distanceX;
+        ScrollOffset += distanceX;
         awakenScrollBars();
         invalidate();
         return true;
     }
     @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        mScroller.fling(mOffset, 0, (int) -velocityX, 0, 0, (int) (mDisplayer.getWidth() - getMeasuredWidth()), 0, 0);
+        mScroller.fling(ScrollOffset, 0, (int) -velocityX, 0, 0, (int) (mDisplayer.getWidth() - getMeasuredWidth()), 0, 0);
         invalidate();
         return true;
     }
 
     private int getDrawnOffset(){
-        if(mOffset < 0)
+        if(ScrollOffset < 0)
             return 0;
-        if(mOffset > mDisplayer.getWidth() - getMeasuredWidth())
+        if(ScrollOffset > mDisplayer.getWidth() - getMeasuredWidth())
             return (int) (mDisplayer.getWidth() - getMeasuredWidth());
 
-        return mOffset;
+        return ScrollOffset;
     }
     @Override protected void onDraw(Canvas canvas) {
         if (mScroller.computeScrollOffset())
-            mOffset = mScroller.getCurrX();
+            ScrollOffset = mScroller.getCurrX();
 
         long a = System.currentTimeMillis();
 

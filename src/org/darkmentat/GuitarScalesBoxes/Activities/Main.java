@@ -37,14 +37,15 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         setContentView(R.layout.activity_main);
         CurrentInstance = this;
 
+        mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
+        mGuitarView.setOnFretIntervalSelectedListener(this);
+
         loadPreferences();
         if(GuitarModel == null)
             GuitarModel = new GuitarModel(GuitarSetting.Settings.get(0), 24);
         GuitarModel.addObserver(this);
 
-        mGuitarView = (GuitarView) findViewById(R.id.main_gvGuitar);
         mGuitarView.setFretBoard(GuitarModel);
-        mGuitarView.setOnFretIntervalSelectedListener(this);
 
         mMetronome = new Metronome();
     }
@@ -52,7 +53,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         if (GuitarModel.Scale != null)
         {
             GuitarModel.setBox(startFret, endFret);
-            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret);
+            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
             mGuitarView.setOffsetFret(GuitarModel.Box.StartFret, GuitarModel.Box.EndFret);
         }
     }
@@ -166,10 +167,14 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         editor.putInt("BoxStartFret", GuitarModel.Box != null ? GuitarModel.Box.StartFret : -1);
         editor.putInt("BoxEndFret", GuitarModel.Box != null ? GuitarModel.Box.EndFret : -1);
 
-        editor.commit();
+        editor.putInt("GuitarViewOffset", mGuitarView.ScrollOffset);
+
+        editor.apply();
     }
     private void loadPreferences(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        mGuitarView.ScrollOffset = preferences.getInt("GuitarViewOffset", 0);
 
         int fretCount = preferences.getInt("FretCount", -1);
 
