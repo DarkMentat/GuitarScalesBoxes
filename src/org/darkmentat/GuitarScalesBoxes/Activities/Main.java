@@ -9,8 +9,11 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.OnFretIntervalSelectedListener;
 import org.darkmentat.GuitarScalesBoxes.Model.*;
@@ -18,6 +21,10 @@ import org.darkmentat.GuitarScalesBoxes.R;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static android.widget.LinearLayout.LayoutParams;
 
 public class Main extends ActionBarActivity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
 {
@@ -29,6 +36,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     private GuitarView mGuitarView;
     private Metronome mMetronome;
     private Menu mMenu;
+    private Menu mActionModeMenu;
 
     private boolean mActionMode = false;
 
@@ -90,6 +98,8 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
 
     @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         mode.getMenuInflater().inflate(R.menu.metronome, menu);
+        menu.findItem(R.id.main_mMetronomeBpm).setTitle("Bpm " + mMetronome.TempoBPM);
+        mActionModeMenu = menu;
         mActionMode = true;
         return true;
     }
@@ -99,8 +109,33 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId())
         {
+            case R.id.main_mMetronomeBpm:
+                final EditText bpm = new EditText(this);
+                bpm.setInputType(InputType.TYPE_CLASS_NUMBER);
+                bpm.setText(Integer.toString(mMetronome.TempoBPM));
+                bpm.setHint(getString(R.string.bpm));
+
+                LinearLayout layout = new LinearLayout(this);
+                LayoutParams params = new LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+                params.setMargins(20, 0, 20, 0);
+                layout.addView(bpm, params);
+
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setTitle(getString(R.string.set_tempo))
+                        .setMessage(getString(R.string.set_tempo_in_bpm))
+                        .setView(layout)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mActionModeMenu.findItem(R.id.main_mMetronomeBpm).setTitle(getString(R.string.bpm) + " " + bpm.getText().toString());
+                                mMetronome.TempoBPM = Integer.valueOf(bpm.getText().toString());
+                            }
+                        })
+                        .show();
+            break;
             case R.id.main_mMetronomePlay:
-                mMetronome.play(200);
+                mMetronome.play();
             break;
             case R.id.main_mMetronomeStop:
                 mMetronome.stop();
@@ -111,6 +146,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     }
     @Override public void onDestroyActionMode(ActionMode mode) {
         mActionMode = false;
+        mActionModeMenu = null;
         mMetronome.stop();
     }
 

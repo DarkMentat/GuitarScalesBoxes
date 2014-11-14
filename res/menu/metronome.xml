@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:sabd="http://schemas.android.com/apk/res-auto">
+    <item   android:id="@+id/main_mMetronomeBpm"
+            android:title="Bpm"
+            android:icon="@drawable/ic_menu_tempo"
+            sabd:showAsAction="always|withText"/>
     <item   android:id="@+id/main_mMetronomeStop"
             android:title="@string/stop"
             android:icon="@android:drawable/ic_media_pause"
-            android:showAsAction="always" />
+            sabd:showAsAction="always" />
     <item   android:id="@+id/main_mMetronomePlay"
             android:title="@string/play"
             android:icon="@android:drawable/ic_media_play"
-            android:showAsAction="always" />
+            sabd:showAsAction="always" />
 </menu>

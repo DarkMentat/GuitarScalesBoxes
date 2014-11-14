@@ -19,6 +19,7 @@ public class Metronome implements Runnable
 
     public PlayStyle Style = PlayStyle.Sound;
     public boolean Looped = true;
+    public int TempoBPM = 120;
 
     private ScheduledExecutorService mExecutor;
     private ScheduledFuture<?> mScheduledFuture;
@@ -38,6 +39,9 @@ public class Metronome implements Runnable
 
     }
 
+    public void play(){
+        play(bpmToRate(TempoBPM));
+    }
     public void play(int rate) {
         stop();
         mScheduledFuture = mExecutor.scheduleAtFixedRate(this, 0, rate, TimeUnit.MILLISECONDS);
@@ -50,6 +54,9 @@ public class Metronome implements Runnable
             @Override public void run() { Main.GuitarModel.unSelectNote(); }
         });
         mCurrent = 0;
+    }
+    private int bpmToRate(int bpm) {
+        return (int) (1000f * 60f / (float)bpm);
     }
 
     @Override

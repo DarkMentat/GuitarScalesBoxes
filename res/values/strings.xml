@@ -15,6 +15,9 @@
     <string name="ask_for_close_activity">Are you sure you want to close this activity?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="set_tempo">Set tempo</string>
+    <string name="set_tempo_in_bpm">Set tempo in bpm (beats per minute)</string>
+    <string name="bpm">Bpm</string>
 
 
 </resources>

@@ -15,5 +15,7 @@
     <string name="ask_for_close_activity">Ви впевнені, що хочете закрити це вікно?</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
+    <string name="set_tempo">Введіть темп</string>
+    <string name="set_tempo_in_bpm">Введіть темп в bpm (удари в хвилину)</string>
 
 </resources>
