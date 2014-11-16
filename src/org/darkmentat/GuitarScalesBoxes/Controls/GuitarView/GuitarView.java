@@ -3,7 +3,6 @@ package org.darkmentat.GuitarScalesBoxes.Controls.GuitarView;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -143,7 +142,6 @@ public class GuitarView extends View implements OnGestureListener, Observer
         return true;
     }
     @Override public void onLongPress(MotionEvent e) {
-        ((Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE)).vibrate(100);
     }
     @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         ScrollOffset += distanceX;
