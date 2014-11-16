@@ -18,6 +18,7 @@
     <string name="set_tempo">Введите темп</string>
     <string name="set_tempo_in_bpm">Введите темп в bpm (удары в минуту)</string>
     <string name="repeat_style">Вид повторения</string>
+    <string name="play_style">Вид проиграша</string>
 
 
 </resources>

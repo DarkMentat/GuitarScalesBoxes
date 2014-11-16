@@ -25,6 +25,7 @@ import java.util.Observer;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.LayoutParams;
+import static org.darkmentat.GuitarScalesBoxes.Model.Metronome.PlayStyle;
 import static org.darkmentat.GuitarScalesBoxes.Model.Metronome.RepeatStyle;
 
 public class Main extends ActionBarActivity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
@@ -101,6 +102,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         mode.getMenuInflater().inflate(R.menu.metronome, menu);
         menu.findItem(R.id.main_mMetronomeBpm).setTitle("Bpm " + mMetronome.TempoBPM);
         menu.findItem(R.id.main_mMetronomeRepeat).setIcon(getMetronomeRepeatIcon());
+        menu.findItem(R.id.main_mMetronomePlayStyle).setIcon(getMetronomePlayStyleIcon());
 
         mActionModeMenu = menu;
         mActionMode = true;
@@ -140,6 +142,10 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
             case R.id.main_mMetronomeRepeat:
                 mMetronome.Repeat = RepeatStyle.values()[(mMetronome.Repeat.ordinal()+1)%3];
                 mActionModeMenu.findItem(R.id.main_mMetronomeRepeat).setIcon(getMetronomeRepeatIcon());
+                break;
+            case R.id.main_mMetronomePlayStyle:
+                mMetronome.Style = PlayStyle.values()[(mMetronome.Style.ordinal()+1)%4];
+                mActionModeMenu.findItem(R.id.main_mMetronomePlayStyle).setIcon(getMetronomePlayStyleIcon());
                 break;
             case R.id.main_mMetronomePlay:
                 mMetronome.play();
@@ -284,6 +290,20 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
                 return R.drawable.ic_menu_down_up;
             case Loop:
                 return R.drawable.ic_menu_repeat;
+        }
+        return -1;
+    }
+    private int getMetronomePlayStyleIcon(){
+        switch (mMetronome.Style)
+        {
+            case Sound:
+                return R.drawable.ic_menu_mediator;
+            case Tick:
+                return R.drawable.ic_menu_drums;
+            case TickWithAccents:
+                return R.drawable.ic_menu_accented_drums;
+            case NoSound:
+                return R.drawable.ic_menu_mute;
         }
         return -1;
     }

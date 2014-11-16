@@ -9,6 +9,9 @@
     <item   android:id="@+id/main_mMetronomeRepeat"
             android:title="@string/repeat_style"
             sabd:showAsAction="always" />
+    <item   android:id="@+id/main_mMetronomePlayStyle"
+            android:title="@string/play_style"
+            sabd:showAsAction="always" />
     <item   android:id="@+id/main_mMetronomeStop"
             android:title="@string/stop"
             android:icon="@android:drawable/ic_media_pause"

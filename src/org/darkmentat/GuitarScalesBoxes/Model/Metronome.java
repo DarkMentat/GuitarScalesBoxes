@@ -14,7 +14,7 @@ public class Metronome implements Runnable
         Loop, Down, DownUp
     }
     public enum PlayStyle {
-        Sound, Tick, TickWithAccents
+        Sound, Tick, TickWithAccents, NoSound
     }
 
     public static final String MetronomeTick = "m1";
@@ -96,6 +96,11 @@ public class Metronome implements Runnable
                     break;
                 case Tick:
                     mSoundPlayer.play(MetronomeTick);
+                    break;
+                case TickWithAccents:
+                    //todo
+                    break;
+                case NoSound:
                     break;
             }
             Main.CurrentInstance.Handler.post(new Runnable()
