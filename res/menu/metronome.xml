@@ -3,9 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:sabd="http://schemas.android.com/apk/res-auto">
     <item   android:id="@+id/main_mMetronomeBpm"
-            android:title="Bpm"
+            android:title="@string/bpm"
             android:icon="@drawable/ic_menu_tempo"
             sabd:showAsAction="always|withText"/>
+    <item   android:id="@+id/main_mMetronomeRepeat"
+            android:title="@string/repeat_style"
+            sabd:showAsAction="always" />
     <item   android:id="@+id/main_mMetronomeStop"
             android:title="@string/stop"
             android:icon="@android:drawable/ic_media_pause"

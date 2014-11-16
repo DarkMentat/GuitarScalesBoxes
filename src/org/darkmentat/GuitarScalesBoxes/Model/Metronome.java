@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Metronome implements Runnable
 {
+    public enum RepeatStyle {
+        Loop, Down, DownUp
+    }
     public enum PlayStyle {
         Sound, Tick, TickWithAccents
     }
@@ -18,7 +21,7 @@ public class Metronome implements Runnable
     public static final String MetronomeAccentedTick = "m2";
 
     public PlayStyle Style = PlayStyle.Sound;
-    public boolean Looped = true;
+    public RepeatStyle Repeat = RepeatStyle.Down;
     public int TempoBPM = 120;
 
     private ScheduledExecutorService mExecutor;
@@ -65,9 +68,16 @@ public class Metronome implements Runnable
         {
             if (mCurrent >= Main.GuitarModel.Box.Points.size() || mCurrent < 0)
             {
-                if(Looped)
+                if(Repeat == RepeatStyle.Loop || Repeat == RepeatStyle.DownUp)
                 {
                     mPlayDirection *= -1;
+
+                    if(Repeat == RepeatStyle.DownUp && mPlayDirection > 0)
+                    {
+                        stop();
+                        return;
+                    }
+
                     mCurrent += mPlayDirection;
                     mCurrent += mPlayDirection;
                 }

@@ -17,6 +17,7 @@
     <string name="no">Нет</string>
     <string name="set_tempo">Введите темп</string>
     <string name="set_tempo_in_bpm">Введите темп в bpm (удары в минуту)</string>
+    <string name="repeat_style">Вид повторения</string>
 
 
 </resources>

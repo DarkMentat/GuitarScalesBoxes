@@ -25,6 +25,7 @@ import java.util.Observer;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.widget.LinearLayout.LayoutParams;
+import static org.darkmentat.GuitarScalesBoxes.Model.Metronome.RepeatStyle;
 
 public class Main extends ActionBarActivity implements OnFretIntervalSelectedListener, ActionMode.Callback, Observer
 {
@@ -99,6 +100,8 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
     @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         mode.getMenuInflater().inflate(R.menu.metronome, menu);
         menu.findItem(R.id.main_mMetronomeBpm).setTitle("Bpm " + mMetronome.TempoBPM);
+        menu.findItem(R.id.main_mMetronomeRepeat).setIcon(getMetronomeRepeatIcon());
+
         mActionModeMenu = menu;
         mActionMode = true;
         return true;
@@ -133,10 +136,14 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
                             }
                         })
                         .show();
-            break;
+                break;
+            case R.id.main_mMetronomeRepeat:
+                mMetronome.Repeat = RepeatStyle.values()[(mMetronome.Repeat.ordinal()+1)%3];
+                mActionModeMenu.findItem(R.id.main_mMetronomeRepeat).setIcon(getMetronomeRepeatIcon());
+                break;
             case R.id.main_mMetronomePlay:
                 mMetronome.play();
-            break;
+                break;
             case R.id.main_mMetronomeStop:
                 mMetronome.stop();
                 break;
@@ -266,5 +273,18 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         }
 
         return res;
+    }
+
+    private int getMetronomeRepeatIcon(){
+        switch (mMetronome.Repeat)
+        {
+            case Down:
+                return R.drawable.ic_menu_down;
+            case DownUp:
+                return R.drawable.ic_menu_down_up;
+            case Loop:
+                return R.drawable.ic_menu_repeat;
+        }
+        return -1;
     }
 }
