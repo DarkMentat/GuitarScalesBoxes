@@ -146,11 +146,11 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
                         .show();
                 break;
             case R.id.main_mMetronomeRepeat:
-                mMetronome.Repeat = RepeatStyle.values()[(mMetronome.Repeat.ordinal()+1)%3];
+                mMetronome.Repeat = RepeatStyle.values()[(mMetronome.Repeat.ordinal()+1)%RepeatStyle.values().length];
                 mActionModeMenu.findItem(R.id.main_mMetronomeRepeat).setIcon(getMetronomeRepeatIcon());
                 break;
             case R.id.main_mMetronomePlayStyle:
-                mMetronome.Style = PlayStyle.values()[(mMetronome.Style.ordinal()+1)%4];
+                mMetronome.Style = PlayStyle.values()[(mMetronome.Style.ordinal()+1)%PlayStyle.values().length];
                 mActionModeMenu.findItem(R.id.main_mMetronomePlayStyle).setIcon(getMetronomePlayStyleIcon());
                 break;
             case R.id.main_mMetronomePlay:
@@ -304,10 +304,10 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         {
             case Sound:
                 return R.drawable.ic_menu_mediator;
-            case Tick:
-                return R.drawable.ic_menu_drums;
-            case TickWithAccents:
-                return R.drawable.ic_menu_accented_drums;
+//            case Tick:
+//                return R.drawable.ic_menu_drums;
+//            case TickWithAccents:
+//                return R.drawable.ic_menu_accented_drums;
             case NoSound:
                 return R.drawable.ic_menu_mute;
         }
