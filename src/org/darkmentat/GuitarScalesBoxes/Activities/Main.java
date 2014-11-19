@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.GuitarView;
 import org.darkmentat.GuitarScalesBoxes.Controls.GuitarView.OnFretIntervalSelectedListener;
 import org.darkmentat.GuitarScalesBoxes.Model.*;
@@ -65,6 +66,11 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
             GuitarModel.setBox(startFret, endFret);
             mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
             mGuitarView.setOffsetFret(GuitarModel.Box.StartFret, GuitarModel.Box.EndFret);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), getString(R.string.first_select_scale), Toast.LENGTH_SHORT).show();
+            mGuitarView.unSelectAll();
         }
     }
 

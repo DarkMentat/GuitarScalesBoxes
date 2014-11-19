@@ -19,5 +19,6 @@
     <string name="set_tempo_in_bpm">Введіть темп в bpm (удари в хвилину)</string>
     <string name="repeat_style">Вид повтору</string>
     <string name="play_style">Вид програвання</string>
+    <string name="first_select_scale">Спершу виберіть гаму!</string>
 
 </resources>

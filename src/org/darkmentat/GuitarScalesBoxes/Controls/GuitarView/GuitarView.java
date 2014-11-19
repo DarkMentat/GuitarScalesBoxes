@@ -67,6 +67,9 @@ public class GuitarView extends View implements OnGestureListener, Observer
         if(ScrollOffset < 0)
             ScrollOffset = 0;
     }
+    public void unSelectAll(){
+        mDisplayer.unSelectAll();
+    }
 
     @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
