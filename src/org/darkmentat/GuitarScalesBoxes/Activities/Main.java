@@ -61,10 +61,17 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         mMetronome = new Metronome();
     }
     @Override public void OnIntervalSelected(int startFret, int endFret) {
+        final int maxMinFretCount = 10;
+
         if (GuitarModel.Scale != null)
         {
             GuitarModel.setBox(startFret, endFret);
-            mGuitarView.setMinFretCountOnScreen(GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1);
+            int minFretCount = GuitarModel.Box.EndFret - GuitarModel.Box.StartFret + 1;
+
+            if(minFretCount > maxMinFretCount)
+                minFretCount = maxMinFretCount;
+
+            mGuitarView.setMinFretCountOnScreen(minFretCount);
             mGuitarView.setOffsetFret(GuitarModel.Box.StartFret, GuitarModel.Box.EndFret);
         }
         else
