@@ -23,7 +23,7 @@ public class Box
         for(int y = fretBoard.StringCount-1; y >= 0; y--)
             for(int x = 0; x < fretBoard.FretCount; x++)
             {
-                if(y == fretBoard.StringCount-1 && x < startFret)
+                if(y == fretBoard.StringCount-1 && x < startFret-1)
                     continue;
 
                 NoteModel note = (NoteModel) fretBoard.Tab[x][y];
@@ -83,8 +83,7 @@ public class Box
             if(checked.size() == 1)
             {
                 Point current = checked.get(0);
-                if(current.x > endFret && current.y == 0)
-                    break;
+
                 Points.add(current);
                 continue;
             }
