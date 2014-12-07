@@ -30,7 +30,7 @@ public class SelectNote extends Fragment
         notes.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
-                Main.GuitarModel.setScale(new Scale(NoteModel.NoteValue.values()[position], ScaleDefinition.Scales.get(scale).StepSequence));
+                Main.GuitarModel.setScale(new Scale(ScaleDefinition.Scales.get(scale).Name, NoteModel.NoteValue.values()[position], ScaleDefinition.Scales.get(scale).StepSequence));
                 getActivity().finish();
 
                 Intent i = new Intent(getActivity(), Main.class);

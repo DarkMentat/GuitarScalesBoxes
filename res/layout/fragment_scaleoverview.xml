@@ -8,7 +8,7 @@
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:textSize="32sp"
-              android:layout_margin="6dp"
+              android:layout_margin="3dp"
               android:text="@string/select_scale"/>
     <ListView
             android:id="@+id/scalesoverview_lvScales"

@@ -13,7 +13,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center_vertical"
             android:paddingLeft="6dip"
-            android:minHeight="?android:attr/listPreferredItemHeight"/>
+            android:paddingRight="6dip"/>
     <Button android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/listviewitem_btnInfo"

@@ -9,14 +9,16 @@ public class Scale
 {
     public final NoteModel Tonic;
     public final String StepSequence;
+    public final String ScaleName;
     public final List<NoteValue> NotesInScale;
 
-    public Scale(NoteValue tonic, String stepSequence) {
-        this(new NoteModel(tonic, 0), stepSequence);
+    public Scale(String scaleName, NoteValue tonic, String stepSequence) {
+        this(scaleName, new NoteModel(tonic, 0), stepSequence);
     }
-    public Scale(NoteModel tonic, String stepSequence) {
+    public Scale(String scaleName, NoteModel tonic, String stepSequence) {
         Tonic = tonic;
         StepSequence = stepSequence;
+        ScaleName = scaleName;
         NotesInScale = Arrays.asList(parseStepSequence(stepSequence));
     }
 

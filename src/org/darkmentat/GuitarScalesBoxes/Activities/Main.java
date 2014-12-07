@@ -190,6 +190,11 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
             mMenu.findItem(R.id.main_mIterateBox).setVisible(true);
         else
             mMenu.findItem(R.id.main_mIterateBox).setVisible(false);
+
+        if(model.Scale != null)
+            setTitle(model.Scale.ScaleName);
+        else
+            setTitle(R.string.app_name);
     }
 
     @Override public void onBackPressed() {
@@ -223,6 +228,7 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
         editor.putString("SettingName", GuitarModel.Setting.Name);
         editor.putString("SettingNotes", notesArrayToString(GuitarModel.Setting.StartNotes));
 
+        editor.putString("ScaleName", GuitarModel.Scale != null ? GuitarModel.Scale.ScaleName : "");
         editor.putString("ScaleStepSequence", GuitarModel.Scale != null ? GuitarModel.Scale.StepSequence : "");
         editor.putString("ScaleTonicValue", GuitarModel.Scale != null ? GuitarModel.Scale.Tonic.Value.name() : "");
 
@@ -247,12 +253,13 @@ public class Main extends ActionBarActivity implements OnFretIntervalSelectedLis
 
         GuitarModel = new GuitarModel(new GuitarSetting(settingNotes, settingName), fretCount);
 
+        String scaleName = preferences.getString("ScaleName", "");
         String stepSequence = preferences.getString("ScaleStepSequence", "");
         String tonicValue = preferences.getString("ScaleTonicValue", "");
 
         if(stepSequence.equals("") || tonicValue.equals("")) return;
 
-        GuitarModel.setScale(new Scale(NoteModel.NoteValue.valueOf(tonicValue), stepSequence));
+        GuitarModel.setScale(new Scale(scaleName, NoteModel.NoteValue.valueOf(tonicValue), stepSequence));
 
         int boxStartFret = preferences.getInt("BoxStartFret", -1);
         int boxEndFret = preferences.getInt("BoxEndFret", -1);
