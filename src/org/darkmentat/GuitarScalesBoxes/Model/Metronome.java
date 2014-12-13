@@ -26,20 +26,24 @@ public class Metronome implements Runnable
 
     private ScheduledExecutorService mExecutor;
     private ScheduledFuture<?> mScheduledFuture;
-    private SoundPlayer mSoundPlayer;
+    private static SoundPlayer mSoundPlayer;
 
     private int mCurrent = 0;
     private int mPlayDirection = +1;
     public Metronome() {
         mExecutor = Executors.newSingleThreadScheduledExecutor();
 
-        mSoundPlayer = new PreRecordedSoundPlayer();
-        new Thread(new Runnable() {
-            @Override public void run() {
-                mSoundPlayer.init();
-            }
-        }).start();
-
+        if(mSoundPlayer == null)
+        {
+            mSoundPlayer = new PreRecordedSoundPlayer();
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run() {
+                    mSoundPlayer.init();
+                }
+            }).start();
+        }
     }
 
     public void play(){
