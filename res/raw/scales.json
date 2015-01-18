@@ -1,51 +1,89 @@
-[   {
-        "Name" : "Пентатоника",
-        "Description" : "Пентатоникой называют лад, состоящий из 5 нот, находящихся в пределах одной октавы. Если вы хотите освоить гитару, пентатоника — та гамма, которую стоит выучить в первую очередь. И для этого есть весомые причины: гамма довольно простая, хорошо работает на простых последовательностях аккордов, кроме того, с нее можно начинать практиковаться в импровизациях для соло. В пентатонике отсутствует, в отличие от натуральной гаммы, малые секунды и тритоны, т.е. самые диссонансные интервалы. ",
-        "StepSequence" : "3223"
-    },
+[ {
+    "Name" : "Pentatonic",
+    "Description" : "Pentatonic is a musical scale with five notes per octave. If you want to master your guitar playing pentatonic scale is the scale worth learning at first. There are important reasons: the scale is fairly simple, sounds well on simple chord progressions, it is possible to begin to practice for solo improvisations. There are no minor seconds and tritons in difference with natural scale, i.e. the most dissonance intervals. ",
+    "StepSequence" : "3223"
+  },
 	{
-		"Name" : "Уменьшенная гамма (тон-полутоновая)",
-		"Description" : "Уменьшенная гамма относится к группе искуственно созданных ладов, а также входит в группу ладов ограниченой транспозиции О.Мессиана. Уменьшенная гамма по всей видимости это наиболее ранняя из искуственно созданных гамм. Наиболее часто ее можно услышать в современных джазовых и фьюжн импровизациях, а также у Dream Theater. Уменьшенная гамма представляет собой чередование тона и полутона либо полутона и тона. Наиболее часто уменьшенная гамма используется для обыгрывания аккордов содержащих в своей основе уменьшенное трезвучие или септаккорд. Кроме того уменьшенная гамма может применяться для обыгрывания мажорных и минорных трезвучий с целью создания звучания вне тональности. Гармонические структуры, образующиеся из уменьшенной гаммы имеют острое и диссонантное звучание. Помимо стандартных уменьшенных трезвучий в уменьшенной гамме можно построить множество нестандартных аккордов. В целом уменьшенная гамма имеет своеообразное звучание, которое может быть применимо в самых различных музыкальных стилистиках.",
-		"StepSequence" : "2121212"
+    "Name" : "Blues scale",
+    "Description" : "Blues scale is closely connected with pentatonic scale and is used mainly in blues. Those who play blues, often add an additional note to the pentatonic scale. Technically it is known as the lowered fifth degree natural minor. It means an additional note between the third and fourth notes of the pentatonic. It is often called blue note. When you add it to the pentatonic scale, you get the blues scale.",
+    "StepSequence" : "32113"
 	},
-    {
-        "Name" : "Целотонная гамма",
-        "Description" : "Современные гитаристы, играющие в разных стилевых направлениях, достаточно часто применяют в своих импровизациях целотонную гамму. Она придает особый колорит звучанию. Иногда ее исполняют в чистом виде или используют секвенции, построенные по этой гамме, а чаще всего ее подмешивают с другими гаммами (ладами).",
-        "StepSequence" : "22222"
-    },
+  {
+    "Name" : "Natural major scale",
+    "Description" : "Major scale is one of the major scales that consists of 7 notes. It is the basis of diatonic modes. Usually sounding of major compositions is subjectively perceived as light and \"joyful\" unlike to minor. The contrast of major and minor is one of the most important aesthetic contrasts in music.",
+    "StepSequence" : "221222"
+  },
 	{
-		"Name" : "Блюзовая гамма",
-		"Description" : "Блюзовая гамма очень тесно связана с пентатоникой и используется, что характерно, в блюзе. Те, кто играют блюз, часто добавляют дополнительную ноту в гамму пентатоники. Технически она известна как пониженная пятая ступень — это означает дополнительную ноту между 3-ей и 4-ой нотами пентатоники. Часто ее называют blue note. Когда вы добавляете ее в пентатонику, вы получаете блюзовую гамму — настолько сильно они взаимосвязаны.",
-		"StepSequence" : "32113"
+    "Name" : "Natural minor scale",
+    "Description" : "Minor scale is one of the major scales that consists of 7 notes. It can be obtained by making natural major scale starting with the fifth degree. So the scales of C major and A minor will contain the same notes, i.e. parallel to these scales. It has unhappy, \ "medieval \" sounding.",
+    "StepSequence" : "212212"
 	},
-	{
-		"Name" : "Натуральный мажор",
-		"Description" : "...",
-		"StepSequence" : "221222"
-	},
-	{
-		"Name" : "Гармонический мажор",
-		"Description" : "...",
-		"StepSequence" : "221312"
-	},
-	{
-		"Name" : "Мелодический мажор",
-		"Description" : "...",
-		"StepSequence" : "222212"
-	},
-	{
-		"Name" : "Натуральный минор",
-		"Description" : "...",
-		"StepSequence" : "212212"
-	},
-	{
-		"Name" : "Гармонический минор",
-		"Description" : "...",
-		"StepSequence" : "212213"
-	},
-	{
-		"Name" : "Мелодический минор",
-		"Description" : "...",
-		"StepSequence" : "212222"
-	}
+
+  {
+    "Name" : "Ionian mode (major)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. Ionian mode is the same as the usual major scale so it has a cheerful joyful sound. But as the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition.",
+    "StepSequence" : "221222"
+  },
+  {
+    "Name" : "Dorian mode (Minor)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Dorian Minor is this very major scale but shifted by one stage. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. This minor is quite sad, but sounds a bit brighter than the natural (Aeolian mode). Dorian mode or as it is called Dorian Minor is one of the most popular scales and they are commonly used in a variety of styles. However, mostly its sounding is associated with jazz and funk. Dorian mode is so common that it is considered as principal instead natural minor. Especially it sounds well in the combination of minor coloring and happy feelings. In the relevant context Dorian mode can be used to create ethnic, folk sounding that is typical for  the Celtic music.",
+    "StepSequence" : "212221"
+  },
+  {
+    "Name" : "Phrygian mode (Minor)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Phrygian minor is this very major scale but shifted by two stage. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Phrygian tune is characterized with harsh, dark sounding. By lowering the second stage characteristic to the natural minor soft sad sounding, it gets cool shades. Apparently, for this reason, Phrygian mode is the most common in heavy music. In fact Phrygian mode along with locrian mode is the hallmark of heavy metal \\m/. Sometimes Phrygian mode can be also used when you want to create the sound of the Spanish East.",
+    "StepSequence" : "122212"
+  },
+  {
+    "Name" : "Lydian mode (major)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Lydian Major is this very major scale but shifted by three stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Very often in modern music Lydian mode is used to create a sequence that is repeated many times. Lydian mode can be used to create fabulous, magical sound. It sounds well along with static chords. Under specific conditions (instrumentation, harmony), it can also create an ethnic sound.",
+    "StepSequence" : "222121"
+  },
+  {
+    "Name" : "Mixolydian mode (major)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Mixolydian Major is this very major scale but shifted by four stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Mixolydian mode is like the Natural Major, however, it is not as triumphant and accomplished and more \ "light \". Mixolydian mode can be easily called American music mode. Any music that has American roots is literally saturated with Mixolydian mode sounding. Mixolydian mode is typical for Scottish and Celtic music as well. As you can see, the sphere of its use is enormous. The reason for the popularity of Mixolydian mode lies in the fact that it is the foundation of blues scale. As a result a lot of blues forms is based on that mode. Then they penetrated to numerous jazz themes and reached rock-and-roll.",
+    "StepSequence" : "221221"
+  },
+  {
+    "Name" : "Aeolian mode (Minor)",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Aeolian Minor is this very major scale but shifted by five stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Aeolian mode is the same thing as the ordinary natural minor and has unhappy \ "medieval \" sound.",
+    "StepSequence" : "212212"
+  },
+  {
+    "Name" : "Locrian mode",
+    "Description" : "The Locrian mode is the seventh of the seven musical modes. It is similar to the natural minor scale except for the lowered second and fifth. The Locrian mode is the minor scale that appears when the major scale is played with the seventh note (seventh scale-degree) as the root. It is used very rarely, much less than the previous ones. In Locrian mode is combined by Lydian and Phrygian modes.",
+    "StepSequence" : "122122"
+  },
+
+  {
+    "Name" : "Harmonic minor scale",
+    "Description" : "Harmonic minor scale is different from the natural minor with the raised seventh degree by one semitone. The sounding of this scale has peculiar Oriental coloring. It can also sound classically as the natural minor but more dramatic.",
+    "StepSequence" : "212213"
+  },
+  {
+    "Name" : "Harmonic major scale",
+    "Description" : "Harmonic major differs from the natural major by lowered 6th degree by one semitone. It sounds very unusual as if it makes more minor-like and becomes gentle and has the Oriental charm.",
+    "StepSequence" : "221312"
+  },
+  {
+    "Name" : "Melodic minor scale",
+    "Description" : "Melodic minor is different from the natural minor by raised sixth and seventh degrees by one semitone. This mode is widely used in many styles.",
+    "StepSequence" : "212222"
+  },
+  {
+    "Name" : "Melodic major scale",
+    "Description" : "This mode is not widely use. Melodic minor is different from the natural major by lowered sixth and seventh degrees by one semitone. It is used mainly when moving melodies in the downward direction and the sounding resembles the natural minor.",
+    "StepSequence" : "222212"
+  },
+
+  {
+    "Name" : "Diminished scale (tone-semitone)",
+    "Description" : "Diminished scale refers to a group of artificial modes, as well as included into a group of modes with limited transposition by composer Olivier Messiaen. Apparently the diminished scale is the earliest of artificial scales. Most often it can be heard in contemporary jazz and fusion improvisations. Diminished scale is the alternation of tones and semitones or semitones and tones. It mostly used for playing minor chords or seventh chord. Diminished scale can be also used for playing major and minor chords to create sounding out of tonality. Harmonic structures formed from a diminished scale have sharp and dissonant sounding. In addition to standard minor chords in the diminished scale a lot of non-standard chords can be created. In general, the diminished scale has peculiar sounding that can be applied in a wide variety of musical styles.",
+    "StepSequence" : "2121212"
+  },
+  {
+    "Name" : "Whole tone scale",
+    "Description" : "Modern guitarists playing in different styles very often use in their improvisations the whole tone scale. It makes sounding especially charming. Sometimes it is performed purely or the sequences constructed by this scale are played. But more often it is mixed with other scales or modes.",
+    "StepSequence" : "22222"
+  }
 ]
