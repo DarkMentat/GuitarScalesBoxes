@@ -15,7 +15,7 @@
   },
 	{
     "Name" : "Natural minor scale",
-    "Description" : "Minor scale is one of the major scales that consists of 7 notes. It can be obtained by making natural major scale starting with the fifth degree. So the scales of C major and A minor will contain the same notes, i.e. parallel to these scales. It has unhappy, \ "medieval \" sounding.",
+    "Description" : "Minor scale is one of the major scales that consists of 7 notes. It can be obtained by making natural major scale starting with the fifth degree. So the scales of C major and A minor will contain the same notes, i.e. parallel to these scales. It has unhappy, \"medieval\" sounding.",
     "StepSequence" : "212212"
 	},
 
@@ -41,12 +41,12 @@
   },
   {
     "Name" : "Mixolydian mode (major)",
-    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Mixolydian Major is this very major scale but shifted by four stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Mixolydian mode is like the Natural Major, however, it is not as triumphant and accomplished and more \ "light \". Mixolydian mode can be easily called American music mode. Any music that has American roots is literally saturated with Mixolydian mode sounding. Mixolydian mode is typical for Scottish and Celtic music as well. As you can see, the sphere of its use is enormous. The reason for the popularity of Mixolydian mode lies in the fact that it is the foundation of blues scale. As a result a lot of blues forms is based on that mode. Then they penetrated to numerous jazz themes and reached rock-and-roll.",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Mixolydian Major is this very major scale but shifted by four stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Mixolydian mode is like the Natural Major, however, it is not as triumphant and accomplished and more \"light \". Mixolydian mode can be easily called American music mode. Any music that has American roots is literally saturated with Mixolydian mode sounding. Mixolydian mode is typical for Scottish and Celtic music as well. As you can see, the sphere of its use is enormous. The reason for the popularity of Mixolydian mode lies in the fact that it is the foundation of blues scale. As a result a lot of blues forms is based on that mode. Then they penetrated to numerous jazz themes and reached rock-and-roll.",
     "StepSequence" : "221221"
   },
   {
     "Name" : "Aeolian mode (Minor)",
-    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Aeolian Minor is this very major scale but shifted by five stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Aeolian mode is the same thing as the ordinary natural minor and has unhappy \ "medieval \" sound.",
+    "Description" : "Diatonic mode (scale) is the mode that has the structure of natural major scale where the tonic is one of its stages. That is Aeolian Minor is this very major scale but shifted by five stages. As the diatonic modes are different only by the stage they start, the sound and mood depend on the total composition. Aeolian mode is the same thing as the ordinary natural minor and has unhappy \"medieval\" sound.",
     "StepSequence" : "212212"
   },
   {
